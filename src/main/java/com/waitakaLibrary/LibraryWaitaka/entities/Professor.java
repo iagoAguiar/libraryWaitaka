@@ -1,6 +1,5 @@
 package com.waitakaLibrary.LibraryWaitaka.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -8,16 +7,16 @@ import org.springframework.data.annotation.Id;
 
 @Data
 @NoArgsConstructor
-public class Estudante extends Usuario{
+public class Professor extends Usuario{
 
     @Id
     private Long id;
 
-    private Profile profile = Profile.ESTUDANTE;
+    private Profile profile = Profile.PROFESSOR;
 
     //Construtor com parâmetros
 
-    public Estudante(
+    public Professor(
             String nome,
             String email,
             String telefone,
