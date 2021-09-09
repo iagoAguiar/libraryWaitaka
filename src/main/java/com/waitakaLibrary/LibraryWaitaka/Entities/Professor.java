@@ -1,8 +1,11 @@
-package com.waitakaLibrary.LibraryWaitaka.entities;
+package com.waitakaLibrary.LibraryWaitaka.Entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+
+import javax.validation.constraints.NotNull;
 
 
 @Data
@@ -14,6 +17,9 @@ public class Professor extends Usuario{
 
     private Profile profile = Profile.PROFESSOR;
 
+    @Indexed(unique = true)
+    @NotNull(message = "Email não pode ser vazio")
+    private String email;
     //Construtor com parâmetros
 
     public Professor(
@@ -22,7 +28,8 @@ public class Professor extends Usuario{
             String telefone,
             Integer matricula,
             String CEP) {
-        super(nome, email, telefone,matricula,CEP);
+        super(nome,  telefone,matricula,CEP);
+        this.email = email;
     }
 
 

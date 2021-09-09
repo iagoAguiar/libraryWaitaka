@@ -1,9 +1,9 @@
 package com.waitakaLibrary.LibraryWaitaka;
 
-import com.waitakaLibrary.LibraryWaitaka.entities.Estudante;
-import com.waitakaLibrary.LibraryWaitaka.entities.Funcionario;
-import com.waitakaLibrary.LibraryWaitaka.entities.Professor;
-import com.waitakaLibrary.LibraryWaitaka.entities.Profile;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Profile;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
