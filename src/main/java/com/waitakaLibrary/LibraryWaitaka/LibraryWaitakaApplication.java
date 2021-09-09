@@ -1,8 +1,10 @@
 package com.waitakaLibrary.LibraryWaitaka;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
 import com.waitakaLibrary.LibraryWaitaka.Repository.EstudanteRepository;
 import com.waitakaLibrary.LibraryWaitaka.Service.EstudanteService;
+import com.waitakaLibrary.LibraryWaitaka.Service.ProfessorService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,16 +20,16 @@ public class LibraryWaitakaApplication {
 
 
 	@Bean
-	CommandLineRunner runner(EstudanteService estudanteService, MongoTemplate mongoTemplate) {
+	CommandLineRunner runner(ProfessorService professorService, MongoTemplate mongoTemplate) {
 		return args -> {
-				Estudante estudante = new Estudante(
+				Professor professor = new Professor(
 					"Iago",
 					"iagoaguiar202@gmail.com",
 					"22 9 9999-9999",
 					1234,
 					"28240-965" );
-				estudanteService.cadastrar(estudante);
-				estudanteService.lista();
+			professorService.cadastrar(professor);
+			professorService.lista();
 
 		};
 

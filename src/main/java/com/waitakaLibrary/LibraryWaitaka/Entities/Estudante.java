@@ -1,22 +1,12 @@
 package com.waitakaLibrary.LibraryWaitaka.Entities;
 
-import com.mongodb.client.model.IndexModel;
-import com.mongodb.internal.connection.IndexMap;
-import com.mongodb.internal.operation.CreateIndexesOperation;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.index.*;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 

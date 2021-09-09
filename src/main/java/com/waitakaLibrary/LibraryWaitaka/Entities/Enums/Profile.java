@@ -1,4 +1,4 @@
-package com.waitakaLibrary.LibraryWaitaka.Entities;
+package com.waitakaLibrary.LibraryWaitaka.Entities.Enums;
 
 public enum Profile {
 

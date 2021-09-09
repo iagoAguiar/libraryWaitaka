@@ -17,23 +17,24 @@ import java.util.List;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class EstudanteService {
 
-        private final EstudanteRepository estudanteRepository;
-    @Autowired
-    EstudanteMapper estudanteMapper;
+    private final EstudanteRepository estudanteRepository;
+
+    private final EstudanteMapper estudanteMapper = EstudanteMapper.INSTANCE;
 
     public List<Estudante> lista(){
         return estudanteRepository.findAll();
     }
 
   public EstudanteDTO cadastrar(Estudante estudante){
-        EstudanteDTO estudanteDTO = estudanteMapper.toDTO(estudanteRepository.insert(estudante));
+        estudanteRepository.insert(estudante);
+        EstudanteDTO estudanteDTO = estudanteMapper.toDTO(estudante);
         return estudanteDTO;
 
     }
     public ResponseEntity<EstudanteDTO> cadastrar(Estudante estudante, UriComponentsBuilder uriBuilder ){
-
-        EstudanteDTO estudanteDTO  = estudanteMapper.toDTO(estudanteRepository.insert(estudante));
-        URI uri = uriBuilder.path("api/v1/estudantes/{nome}").buildAndExpand(estudanteDTO.getNome()).toUri();
+        estudanteRepository.insert(estudante);
+        EstudanteDTO estudanteDTO  = estudanteMapper.toDTO(estudante);
+        URI uri = uriBuilder.path("api/v1/estudantes/{nome}").buildAndExpand(estudante.getNome()).toUri();
 
         return ResponseEntity.created(uri).body(estudanteDTO);
 

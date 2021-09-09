@@ -1,9 +1,9 @@
 package com.waitakaLibrary.LibraryWaitaka.Entities;
 
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 
 import javax.validation.constraints.NotNull;
 
@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public class Professor extends Usuario{
 
     @Id
-    private Long id;
+    private String id;
 
     private Profile profile = Profile.PROFESSOR;
 
