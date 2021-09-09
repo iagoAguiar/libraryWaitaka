@@ -3,7 +3,7 @@ package com.waitakaLibrary.LibraryWaitaka;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Profile;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

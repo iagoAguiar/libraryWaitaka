@@ -1,7 +1,7 @@
 package com.waitakaLibrary.LibraryWaitaka.Entities.DTO;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Profile;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
