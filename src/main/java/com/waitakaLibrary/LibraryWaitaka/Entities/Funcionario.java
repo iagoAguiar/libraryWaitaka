@@ -17,7 +17,7 @@ public class Funcionario extends Usuario{
 
     private Profile profile = Profile.FUNCIONARIO;
 
-    @Indexed(unique = true)
+    //@Indexed(unique = true)
     @NotNull(message = "Email não pode ser vazio")
     private String email;
     //Construtor com parâmetros

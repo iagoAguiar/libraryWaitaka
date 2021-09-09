@@ -15,17 +15,29 @@ import java.util.List;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class EstudanteService {
 
-    private final EstudanteRepository estudanteRepository;
+        private final EstudanteRepository estudanteRepository;
+
+
 
     public List<Estudante> lista(){
         return estudanteRepository.findAll();
     }
 
-    public Estudante cadastrar(Estudante estudante){
-
+  public Estudante cadastrar(Estudante estudante){
         Estudante estudantesalvo = estudanteRepository.insert(estudante);
-        System.out.println(estudantesalvo);
         return estudantesalvo;
 
     }
+    public ResponseEntity<Estudante> cadastrar(Estudante estudante, UriComponentsBuilder uriBuilder ){
+        Estudante estudantesalvo = estudanteRepository.insert(estudante);
+        URI uri = uriBuilder.path("api/v1/estudantes/{nome}").buildAndExpand(estudantesalvo.getNome()).toUri();
+
+        return ResponseEntity.created(uri).body(estudantesalvo);
+
+    }
 }
+
+
+
+
+

@@ -17,7 +17,7 @@ public class Professor extends Usuario{
 
     private Profile profile = Profile.PROFESSOR;
 
-    @Indexed(unique = true)
+    //@Indexed(unique = true)
     @NotNull(message = "Email não pode ser vazio")
     private String email;
     //Construtor com parâmetros

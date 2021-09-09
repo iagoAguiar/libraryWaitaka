@@ -32,7 +32,7 @@ public class Estudante extends Usuario{
 
     private Profile profile = Profile.ESTUDANTE;
 
-    @Indexed(unique = true)
+    //@Indexed(unique = true)
     @NotNull(message = "Email não pode ser vazio")
     private String email;
 

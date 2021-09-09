@@ -11,6 +11,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -25,12 +29,20 @@ public class TesteServices {
     @InjectMocks
     private EstudanteService estudanteService;
 
+    @Test
+    void testeEstudanteRepository() {
+        Estudante estudante = UsuarioBuilder.builder().build().toEstudante();
+        Mockito.when(estudanteService.cadastrar(estudante)).thenReturn(estudante);
 
+    }
 
     @Test
-    void testeEstudanteRepository(){
+    void testeEstudanteRepositoryComURI() {
         Estudante estudante = UsuarioBuilder.builder().build().toEstudante();
-
-        Mockito.when(estudanteService.cadastrar(estudante)).thenReturn(estudante);
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString("api/v1/estudantes/{nome}");
+        URI uri = UriComponentsBuilder.fromUriString("api/v1/estudantes/{nome}").buildAndExpand(estudante.getNome()).toUri();
+        Mockito.when(estudanteService.cadastrar(estudante,
+                        uriBuilder))
+                .thenReturn(ResponseEntity.created(uri).body(estudante));
     }
 }
