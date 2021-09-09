@@ -17,19 +17,5 @@ public class LibraryWaitakaApplication {
 	}
 
 
-	@Bean
-	CommandLineRunner runner(EstudanteService estudanteService, MongoTemplate mongoTemplate) {
-		return args -> {
-				Estudante estudante = new Estudante(
-					"Iago",
-					"iagoaguiar202@gmail.com",
-					"22 9 9999-9999",
-					1234,
-					"28240-965" );
-				estudanteService.cadastrar(estudante);
-				estudanteService.lista();
 
-		};
-
-	}
 }
