@@ -1,5 +1,6 @@
 package com.waitakaLibrary.LibraryWaitaka.Controllers;
 
+import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Service.EstudanteService;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,7 @@ public class EstudanteController {
     @PostMapping
     @Transactional
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Estudante> cadastrar(@RequestBody @Valid Estudante estudante, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<EstudanteDTO> cadastrar(@RequestBody @Valid Estudante estudante, UriComponentsBuilder uriBuilder){
         return estudanteService.cadastrar(estudante, uriBuilder);
     }
 

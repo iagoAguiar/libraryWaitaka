@@ -1,7 +1,9 @@
 package com.waitakaLibrary.LibraryWaitaka.Service;
 
+import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Repository.EstudanteRepository;
+import com.waitakaLibrary.LibraryWaitaka.mappers.EstudanteMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,25 +18,24 @@ import java.util.List;
 public class EstudanteService {
 
         private final EstudanteRepository estudanteRepository;
-
-
+    @Autowired
+    EstudanteMapper estudanteMapper;
 
     public List<Estudante> lista(){
         return estudanteRepository.findAll();
     }
 
-  public Estudante cadastrar(Estudante estudante){
-        Estudante estudantesalvo = estudanteRepository.insert(estudante);
-        return estudantesalvo;
+  public EstudanteDTO cadastrar(Estudante estudante){
+        EstudanteDTO estudanteDTO = estudanteMapper.toDTO(estudanteRepository.insert(estudante));
+        return estudanteDTO;
 
     }
-    public ResponseEntity<Estudante> cadastrar(Estudante estudante, UriComponentsBuilder uriBuilder ){
-        System.out.println(estudante.getNome());
+    public ResponseEntity<EstudanteDTO> cadastrar(Estudante estudante, UriComponentsBuilder uriBuilder ){
 
-        Estudante estudantesalvo = estudanteRepository.insert(estudante);
-        URI uri = uriBuilder.path("api/v1/estudantes/{nome}").buildAndExpand(estudantesalvo.getNome()).toUri();
+        EstudanteDTO estudanteDTO  = estudanteMapper.toDTO(estudanteRepository.insert(estudante));
+        URI uri = uriBuilder.path("api/v1/estudantes/{nome}").buildAndExpand(estudanteDTO.getNome()).toUri();
 
-        return ResponseEntity.created(uri).body(estudantesalvo);
+        return ResponseEntity.created(uri).body(estudanteDTO);
 
     }
 }

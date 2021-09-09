@@ -1,6 +1,7 @@
 package com.waitakaLibrary.LibraryWaitaka;
 
 import com.waitakaLibrary.LibraryWaitaka.Builder.UsuarioBuilder;
+import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Repository.EstudanteRepository;
 import com.waitakaLibrary.LibraryWaitaka.Service.EstudanteService;
@@ -37,7 +38,8 @@ public class TesteServices {
     @Test
     void testeEstudanteServiceEService() {
         Estudante estudante = UsuarioBuilder.builder().build().toEstudante();
-        Mockito.when(estudanteService.cadastrar(estudante)).thenReturn(estudante);
+        EstudanteDTO estudanteDTO = new EstudanteDTO(estudante);
+        Mockito.when(estudanteService.cadastrar(estudante)).thenReturn(estudanteDTO);
         Mockito.when(estudanteRepository.insert(estudante)).thenReturn(estudante);
 
     }
@@ -45,14 +47,12 @@ public class TesteServices {
     @Test
     void testeEstudanteServoceComURI() {
         Estudante estudante = UsuarioBuilder.builder().build().toEstudante();
-
+        EstudanteDTO estudanteDTO = new EstudanteDTO(estudante);
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString("api/v1/estudantes/{nome}");
         URI uri = UriComponentsBuilder.fromUriString("api/v1/estudantes/{nome}")
                 .buildAndExpand(estudante.getNome()).toUri();
 
-        Mockito.when(estudanteService.cadastrar(estudante, uriBuilder)).thenReturn(ResponseEntity.created(uri).body(estudante));
-
-
-
+        Mockito.when(estudanteService.cadastrar(estudante, uriBuilder))
+                .thenReturn(ResponseEntity.created(uri).body(estudanteDTO));
     }
 }
