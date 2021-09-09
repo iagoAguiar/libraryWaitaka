@@ -29,6 +29,8 @@ public class EstudanteService {
 
     }
     public ResponseEntity<Estudante> cadastrar(Estudante estudante, UriComponentsBuilder uriBuilder ){
+        System.out.println(estudante.getNome());
+
         Estudante estudantesalvo = estudanteRepository.insert(estudante);
         URI uri = uriBuilder.path("api/v1/estudantes/{nome}").buildAndExpand(estudantesalvo.getNome()).toUri();
 
