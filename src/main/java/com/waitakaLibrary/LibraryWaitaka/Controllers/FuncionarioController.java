@@ -1,10 +1,7 @@
 package com.waitakaLibrary.LibraryWaitaka.Controllers;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.FuncionarioDTO;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
-import com.waitakaLibrary.LibraryWaitaka.Service.EstudanteService;
 import com.waitakaLibrary.LibraryWaitaka.Service.FuncionarioService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
