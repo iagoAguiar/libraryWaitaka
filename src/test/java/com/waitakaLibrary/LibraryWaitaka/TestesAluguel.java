@@ -9,12 +9,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class TestesAluguel {
 
+
+    DateTimeFormatter $format1 = DateTimeFormatter.ofPattern("dd/MM/yyy");
 
 
     @Test
@@ -23,8 +26,8 @@ public class TestesAluguel {
         Estudante estudante = UsuarioBuilder.builder().build().toEstudante();
         Aluguel aluguel = new Aluguel("Paulo Coelho", "Aleph",  LocalDateTime.now(), LocalDateTime.now(), "1 edição", estudante);
         assertEquals(aluguel.getAutor(), "Paulo Coelho");
-        assertEquals(aluguel.getDiaAluguel(), "10/09/2021");
-        assertEquals(aluguel.getDataRenovacao(), "17/09/2021");
+        assertEquals(aluguel.getDiaAluguel(), LocalDateTime.parse(LocalDateTime.now().toString()).format($format1));
+        assertEquals(aluguel.getDataRenovacao(), LocalDateTime.parse(LocalDateTime.now().plusDays(7).toString()).format($format1));
     }
     @Test
     void testeNovoAluguelFuncionario() {
@@ -32,8 +35,8 @@ public class TestesAluguel {
         Funcionario funcionario = UsuarioBuilder.builder().build().toFuncionario();
         Aluguel aluguel = new Aluguel("Paulo Coelho", "Aleph",  LocalDateTime.now(), LocalDateTime.now(), "1 edição", funcionario);
         assertEquals(aluguel.getAutor(), "Paulo Coelho");
-        assertEquals(aluguel.getDiaAluguel(), "10/09/2021");
-        assertEquals(aluguel.getDataRenovacao(), "20/09/2021");
+        assertEquals(aluguel.getDiaAluguel(), LocalDateTime.parse(LocalDateTime.now().toString()).format($format1));
+        assertEquals(aluguel.getDataRenovacao(), LocalDateTime.parse(LocalDateTime.now().plusDays(10).toString()).format($format1));
 
     }
     @Test
@@ -42,7 +45,7 @@ public class TestesAluguel {
         Professor professor = UsuarioBuilder.builder().build().toProfessor();
         Aluguel aluguel = new Aluguel("Paulo Coelho", "Aleph",  LocalDateTime.now(), LocalDateTime.now(), "1 edição", professor);
         assertEquals(aluguel.getAutor(), "Paulo Coelho");
-        assertEquals(aluguel.getDiaAluguel(), "10/09/2021");
-        assertEquals(aluguel.getDataRenovacao(), "24/09/2021");
+        assertEquals(aluguel.getDiaAluguel(), LocalDateTime.parse(LocalDateTime.now().toString()).format($format1));
+        assertEquals(aluguel.getDataRenovacao(), LocalDateTime.parse(LocalDateTime.now().plusDays(14).toString()).format($format1));
     }
 }
