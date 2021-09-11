@@ -1,6 +1,7 @@
 package com.waitakaLibrary.LibraryWaitaka.Entities;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -15,12 +16,10 @@ public class Professor extends Usuario{
     @Id
     private String id;
 
-    private Profile profile = Profile.PROFESSOR;
 
     //@Indexed(unique = true)
     @NotNull(message = "Email não pode ser vazio")
     private String email;
-    //Construtor com parâmetros
 
     public Professor(
             String nome,
@@ -28,7 +27,8 @@ public class Professor extends Usuario{
             String telefone,
             Integer matricula,
             String CEP) {
-        super(nome,  telefone,matricula,CEP);
+        super(nome,telefone,matricula,CEP);
+        this.profile = Profile.PROFESSOR;
         this.email = email;
     }
 

@@ -17,14 +17,13 @@ public class EstudanteDTO extends UsuarioDTO {
 
 
     private String id;
-    private Profile profile = Profile.ESTUDANTE;
     private String email;
 
     public EstudanteDTO(Estudante estudante){
         this.id = estudante.getId();
         setNome(estudante.getNome());
         setEmail(estudante.getEmail());
-        setProfile(estudante.getProfile());
+        setProfile(Profile.ESTUDANTE);
         setCEP(estudante.getCEP());
         setTelefone(estudante.getTelefone());
         setMatricula(estudante.getMatricula());

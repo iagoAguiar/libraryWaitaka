@@ -20,7 +20,6 @@ public class Estudante extends Usuario{
     @Id
     private String id;
 
-    private Profile profile = Profile.ESTUDANTE;
 
     //@Indexed(unique = true)
     @NotNull(message = "Email não pode ser vazio")
@@ -34,9 +33,9 @@ public class Estudante extends Usuario{
             String telefone,
             Integer matricula,
             String CEP) {
-        super(nome,   telefone,matricula,CEP);
+        super(nome, telefone,matricula,CEP);
         this.email = email;
-
+        this.profile = Profile.ESTUDANTE;
 
     }
 
