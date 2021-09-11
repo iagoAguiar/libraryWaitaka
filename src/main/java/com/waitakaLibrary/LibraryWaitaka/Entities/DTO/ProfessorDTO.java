@@ -18,14 +18,13 @@ public class ProfessorDTO extends UsuarioDTO {
 
 
     private String id;
-    private Profile profile = Profile.PROFESSOR;
     private String email;
 
     public ProfessorDTO(Professor professor){
         this.id = professor.getId();
         setNome(professor.getNome());
         setEmail(professor.getEmail());
-        setProfile(professor.getProfile());
+        setProfile(Profile.PROFESSOR);
         setCEP(professor.getCEP());
         setTelefone(professor.getTelefone());
         setMatricula(professor.getMatricula());

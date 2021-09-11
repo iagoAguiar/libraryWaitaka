@@ -15,8 +15,6 @@ public class Funcionario extends Usuario{
     @Id
     private String id;
 
-    private Profile profile = Profile.FUNCIONARIO;
-
     //@Indexed(unique = true)
     @NotNull(message = "Email não pode ser vazio")
     private String email;
@@ -28,10 +26,9 @@ public class Funcionario extends Usuario{
             String telefone,
             Integer matricula,
             String CEP) {
-        super(nome,  telefone,matricula,CEP);
+        super(nome, telefone,matricula,CEP);
         this.email = email;
+        this.profile = Profile.FUNCIONARIO;
     }
-
-
 
 }

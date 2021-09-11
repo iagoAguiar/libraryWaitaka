@@ -36,11 +36,8 @@ public class FuncionarioService {
 
     }
     public ResponseEntity<FuncionarioDTO> cadastrar(Funcionario funcionario, UriComponentsBuilder uriBuilder ){
+        Funcionario teste = funcionarioRepository.insert(funcionario);
         FuncionarioDTO funcionarioDTO  = funcionarioMapper.toDTO(funcionario);
-
-\       funcionarioRepository.save(funcionario);
-
-
         URI uri = uriBuilder.path("api/v1/funcionarios/{nome}").buildAndExpand(funcionario.getNome()).toUri();
 
         return ResponseEntity.created(uri).body(funcionarioDTO);

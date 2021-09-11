@@ -69,7 +69,7 @@ public class TesteServicesRepositories {
     }
 
     @Test
-    void testeEstudanteServoceComURI() {
+    void testeEstudanteServiceComURI() {
         Estudante estudante = UsuarioBuilder.builder().build().toEstudante();
         EstudanteDTO estudanteDTO = new EstudanteDTO(estudante);
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString("api/v1/estudantes/{nome}");
@@ -81,7 +81,7 @@ public class TesteServicesRepositories {
     }
 
     @Test
-    void testeProfessorServoce() {
+    void testeProfessorService() {
         Professor professor = UsuarioBuilder.builder().build().toProfessor();
         ProfessorDTO professorDTO = new ProfessorDTO(professor);
         Mockito.when(professorService.cadastrar(professor)).thenReturn(professorDTO);
@@ -93,7 +93,7 @@ public class TesteServicesRepositories {
 
 
     @Test
-    void testeProfessorServoceComURI() {
+    void testeProfessorServiceComURI() {
         Professor professor = UsuarioBuilder.builder().build().toProfessor();
         ProfessorDTO professorDTO = new ProfessorDTO(professor);
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString("api/v1/professores/{nome}");
@@ -108,7 +108,7 @@ public class TesteServicesRepositories {
 
 
     @Test
-    void testeFuncionarioServoce() {
+    void testeFuncionarioService() {
         Funcionario funcionario = UsuarioBuilder.builder().build().toFuncionario();
         FuncionarioDTO funcionarioDTO = new FuncionarioDTO(funcionario);
         Mockito.when(funcionarioService.cadastrar(funcionario)).thenReturn(funcionarioDTO);
@@ -117,7 +117,7 @@ public class TesteServicesRepositories {
     }
 
     @Test
-    void testeFuncionarioServoceComURI() {
+    void testeFuncionarioServiceComURI() {
         Funcionario funcionario = UsuarioBuilder.builder().build().toFuncionario();
         FuncionarioDTO funcionarioDTO = new FuncionarioDTO(funcionario);
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString("api/v1/funcionarios/{nome}");

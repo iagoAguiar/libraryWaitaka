@@ -1,6 +1,7 @@
 package com.waitakaLibrary.LibraryWaitaka.Entities.DTO;
 
 
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ abstract class UsuarioDTO {
     private String telefone;
     private Integer matricula;
     private String CEP;
+    private Profile profile;
 
 
 }

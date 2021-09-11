@@ -18,14 +18,14 @@ public class FuncionarioDTO extends UsuarioDTO {
 
 
     private String id;
-    private Profile profile = Profile.FUNCIONARIO;
     private String email;
 
     public FuncionarioDTO(Funcionario funcionario){
+
         this.id = funcionario.getId();
         setNome(funcionario.getNome());
         setEmail(funcionario.getEmail());
-        setProfile(funcionario.getProfile());
+        setProfile(Profile.FUNCIONARIO);
         setCEP(funcionario.getCEP());
         setTelefone(funcionario.getTelefone());
         setMatricula(funcionario.getMatricula());
