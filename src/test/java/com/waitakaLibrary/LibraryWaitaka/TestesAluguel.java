@@ -1,8 +1,9 @@
 package com.waitakaLibrary.LibraryWaitaka;
 
+import com.waitakaLibrary.LibraryWaitaka.Builder.AluguelBuilder;
 import com.waitakaLibrary.LibraryWaitaka.Builder.UsuarioBuilder;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Aluguel;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
+
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
 import org.junit.jupiter.api.Test;
@@ -23,17 +24,18 @@ public class TestesAluguel {
     @Test
     void testeNovoAluguelEstudante() {
 
-        Estudante estudante = UsuarioBuilder.builder().build().toEstudante();
-        Aluguel aluguel = new Aluguel("Paulo Coelho", "Aleph",  LocalDateTime.now(), LocalDateTime.now(), "1 edição", estudante);
+        Aluguel aluguel = AluguelBuilder.builder().build().toAlguelEstudante();
+
         assertEquals(aluguel.getAutor(), "Paulo Coelho");
         assertEquals(aluguel.getDiaAluguel(), LocalDateTime.parse(LocalDateTime.now().toString()).format($format1));
         assertEquals(aluguel.getDataRenovacao(), LocalDateTime.parse(LocalDateTime.now().plusDays(7).toString()).format($format1));
+
     }
     @Test
     void testeNovoAluguelFuncionario() {
 
-        Funcionario funcionario = UsuarioBuilder.builder().build().toFuncionario();
-        Aluguel aluguel = new Aluguel("Paulo Coelho", "Aleph",  LocalDateTime.now(), LocalDateTime.now(), "1 edição", funcionario);
+        Aluguel aluguel = AluguelBuilder.builder().build().toAluguelFuncionario();
+
         assertEquals(aluguel.getAutor(), "Paulo Coelho");
         assertEquals(aluguel.getDiaAluguel(), LocalDateTime.parse(LocalDateTime.now().toString()).format($format1));
         assertEquals(aluguel.getDataRenovacao(), LocalDateTime.parse(LocalDateTime.now().plusDays(10).toString()).format($format1));
@@ -42,10 +44,18 @@ public class TestesAluguel {
     @Test
     void testeNovoAluguelProfessor() {
 
-        Professor professor = UsuarioBuilder.builder().build().toProfessor();
-        Aluguel aluguel = new Aluguel("Paulo Coelho", "Aleph",  LocalDateTime.now(), LocalDateTime.now(), "1 edição", professor);
+        Aluguel aluguel = AluguelBuilder.builder().build().toAluguelProfessor();
         assertEquals(aluguel.getAutor(), "Paulo Coelho");
         assertEquals(aluguel.getDiaAluguel(), LocalDateTime.parse(LocalDateTime.now().toString()).format($format1));
         assertEquals(aluguel.getDataRenovacao(), LocalDateTime.parse(LocalDateTime.now().plusDays(14).toString()).format($format1));
     }
-}
+//
+//    @Test
+//    void testeMapeamentoDTO() {
+//        Professor professor = UsuarioBuilder.builder().build().toProfessor();
+//        //Aluguel aluguel = new Aluguel("O alquimista","Paulo Coelho", "Aleph",  LocalDateTime.now(), LocalDateTime.now(), "1 edição", professor);
+//
+//    }
+//
+
+    }
