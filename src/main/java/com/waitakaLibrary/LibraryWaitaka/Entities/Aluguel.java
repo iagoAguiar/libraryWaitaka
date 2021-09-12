@@ -18,6 +18,9 @@ public class Aluguel {
     @Id
     private String id;
 
+    @NotNull(message = "Titulo não pode ser vazio")
+    String titulo;
+
     @NotNull(message = "Autor não pode ser vazio")
     private String autor;
 
@@ -42,12 +45,14 @@ public class Aluguel {
 
 
     public Aluguel(
+            String titulo,
             String autor,
             String editora,
             LocalDateTime diaAluguel,
             LocalDateTime lancamento,
             String edicao,
             Usuario locatario) {
+        this.titulo = titulo;
         this.autor = autor;
         this.editora = editora;
         this.locatario = locatario;
