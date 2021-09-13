@@ -1,4 +1,4 @@
-package com.waitakaLibrary.LibraryWaitaka;
+package com.waitakaLibrary.LibraryWaitaka.Testes;
 
 import com.waitakaLibrary.LibraryWaitaka.Builder.UsuarioBuilder;
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;

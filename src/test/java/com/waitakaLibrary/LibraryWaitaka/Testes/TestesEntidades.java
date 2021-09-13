@@ -1,4 +1,4 @@
-package com.waitakaLibrary.LibraryWaitaka;
+package com.waitakaLibrary.LibraryWaitaka.Testes;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;

@@ -1,11 +1,10 @@
-package com.waitakaLibrary.LibraryWaitaka;
+package com.waitakaLibrary.LibraryWaitaka.Testes;
 
 import com.waitakaLibrary.LibraryWaitaka.Builder.AluguelBuilder;
-import com.waitakaLibrary.LibraryWaitaka.Builder.UsuarioBuilder;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Aluguel;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
+import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.AluguelDTO;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -19,6 +18,8 @@ public class TestesAluguel {
 
 
     DateTimeFormatter $format1 = DateTimeFormatter.ofPattern("dd/MM/yyy");
+
+
 
 
     @Test
@@ -49,13 +50,17 @@ public class TestesAluguel {
         assertEquals(aluguel.getDiaAluguel(), LocalDateTime.parse(LocalDateTime.now().toString()).format($format1));
         assertEquals(aluguel.getDataRenovacao(), LocalDateTime.parse(LocalDateTime.now().plusDays(14).toString()).format($format1));
     }
-//
-//    @Test
-//    void testeMapeamentoDTO() {
-//        Professor professor = UsuarioBuilder.builder().build().toProfessor();
-//        //Aluguel aluguel = new Aluguel("O alquimista","Paulo Coelho", "Aleph",  LocalDateTime.now(), LocalDateTime.now(), "1 edição", professor);
-//
-//    }
-//
+
+    @Test
+    void testeMapeamentoDTO() {
+        Aluguel aluguel = AluguelBuilder.builder().build().toAlguelEstudante();
+        AluguelDTO aluguelDTO = new AluguelDTO(aluguel);
+
+        assertEquals(aluguelDTO.getTitulo(), "O alquimista");
+        assertEquals(aluguelDTO.getAutor(), "Paulo Coelho");
+
+
+    }
+
 
     }
