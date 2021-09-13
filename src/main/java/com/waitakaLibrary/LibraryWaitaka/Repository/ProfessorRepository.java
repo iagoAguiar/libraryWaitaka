@@ -4,4 +4,8 @@ import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface ProfessorRepository extends MongoRepository<Professor,String> {}
+import java.util.Optional;
+
+public interface ProfessorRepository extends MongoRepository<Professor,String> {
+    Optional<Professor> findByEmail(String email);
+}

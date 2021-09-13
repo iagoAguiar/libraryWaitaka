@@ -1,7 +1,11 @@
 package com.waitakaLibrary.LibraryWaitaka.Repository;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface FuncionarioRepository extends MongoRepository<Funcionario,String> {}
+import java.util.Optional;
+
+public interface FuncionarioRepository extends MongoRepository<Funcionario,String> {
+    Optional<Funcionario> findByEmail(String email);
+
+}

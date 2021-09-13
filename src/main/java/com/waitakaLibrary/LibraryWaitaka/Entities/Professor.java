@@ -5,22 +5,27 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
 
 
 @Data
 @NoArgsConstructor
+@Document
 public class Professor extends Usuario{
 
     @Id
     private String id;
 
 
-    //@Indexed(unique = true)
+    @Indexed(unique = true)
     @NotNull(message = "Email não pode ser vazio")
     private String email;
 
+    @PersistenceConstructor
     public Professor(
             String nome,
             String email,

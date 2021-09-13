@@ -18,21 +18,23 @@ public class AluguelBuilder {
     @Builder.Default
     String editora = "Aleph";
     @Builder.Default
-    LocalDateTime diaAluguel = LocalDateTime.now();
+    LocalDateTime diaAluguel ;
     @Builder.Default
-    LocalDateTime lancamento = LocalDateTime.now();
+    String lancamento =  "12/04/1989";
      @Builder.Default
     String edicao= "1 edição";
      @Builder.Default
      Estudante estudante = UsuarioBuilder.builder().build().toEstudante();
      @Builder.Default
-     Professor professor = UsuarioBuilder.builder().build().toProfessor();
-     @Builder.Default
      Funcionario funcionario = UsuarioBuilder.builder().build().toFuncionario();
+     @Builder.Default
+     Professor professor = UsuarioBuilder.builder().build().toProfessor();
 
-public Aluguel toAlguelEstudante(){ return new Aluguel(titulo,autor,editora,diaAluguel,lancamento, edicao,estudante);};
-public Aluguel toAluguelProfessor(){ return new Aluguel(titulo,autor,editora,diaAluguel,lancamento, edicao,professor);};
-public Aluguel toAluguelFuncionario(){ return new Aluguel(titulo,autor,editora,diaAluguel,lancamento, edicao,funcionario);};
+
+
+public Aluguel toAlguelEstudante(){return new Aluguel(titulo,autor,editora,lancamento, edicao, estudante); };
+public Aluguel toAluguelProfessor(){ return new Aluguel(titulo,autor,editora,lancamento, edicao,professor);};
+public Aluguel toAluguelFuncionario(){ return new Aluguel(titulo,autor,editora,lancamento, edicao,funcionario);};
 
 
 }

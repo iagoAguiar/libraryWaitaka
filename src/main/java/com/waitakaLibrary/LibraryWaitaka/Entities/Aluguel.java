@@ -31,16 +31,16 @@ public class Aluguel {
     private String edicao;
 
     @NotNull(message = "Dia do aluguel não pode ser vazio")
-    private String diaAluguel;
+    private String diaAluguel  = LocalDateTime.now().toString();
 
     private String dataRenovacao;
 
     @NotNull(message = "Data de lançamento não pode ser vazio")
     private String lancamento;
 
-    private Usuario locatario;
 
-    DateTimeFormatter $format1 = DateTimeFormatter.ofPattern("dd/MM/yyy");
+   private Usuario usuario;
+
 
 
 
@@ -48,37 +48,40 @@ public class Aluguel {
             String titulo,
             String autor,
             String editora,
-            LocalDateTime diaAluguel,
-            LocalDateTime lancamento,
+            String lancamento,
             String edicao,
-            Usuario locatario) {
+            Usuario usuario) {
         this.titulo = titulo;
         this.autor = autor;
         this.editora = editora;
-        this.locatario = locatario;
+        this.usuario = usuario;
         this.edicao = edicao.toString();
-        this.lancamento = LocalDateTime.parse(lancamento.toString()).format($format1);
-        this.diaAluguel = LocalDateTime.parse(diaAluguel.toString()).format($format1);
+        this.lancamento = lancamento;
 
 
-        defineTempoLocacao(locatario, diaAluguel.toString());
+        defineDatas(usuario, diaAluguel.toString());
     }
 
 
 
 
-    private void defineTempoLocacao(Usuario locatario, String diaAluguel) {
+    private void defineDatas(Usuario locatario, String diaAluguel) {
+
+        DateTimeFormatter format1 = DateTimeFormatter.ofPattern("dd/MM/yyy");
+
         switch (locatario.getProfile()){
             case ESTUDANTE:
-                this.dataRenovacao = LocalDateTime.parse(diaAluguel).plusDays(7).format($format1);
+                this.dataRenovacao = LocalDateTime.parse(diaAluguel).plusDays(7).format(format1);
                 break;
             case FUNCIONARIO:
-                this.dataRenovacao = LocalDateTime.parse(diaAluguel).plusDays(10).format($format1);
+                this.dataRenovacao = LocalDateTime.parse(diaAluguel).plusDays(10).format(format1);
                 break;
             case PROFESSOR:
-                this.dataRenovacao = LocalDateTime.parse(diaAluguel).plusDays(14).format($format1);
+                this.dataRenovacao = LocalDateTime.parse(diaAluguel).plusDays(14).format(format1);
                 break;
         }
+        this.diaAluguel = LocalDateTime.parse(diaAluguel).format(format1);
+
     }
 
 
