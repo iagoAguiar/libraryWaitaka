@@ -20,7 +20,6 @@ public class EstudanteDTO extends UsuarioDTO {
 
 
     private String id;
-    @NotNull(message ="Email não pode ser nulo")
     private String email;
 
     public EstudanteDTO(Estudante estudante){

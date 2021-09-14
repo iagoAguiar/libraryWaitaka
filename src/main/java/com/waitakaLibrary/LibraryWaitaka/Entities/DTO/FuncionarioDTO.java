@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
 
 @Data
 @Builder
@@ -18,7 +20,11 @@ public class FuncionarioDTO extends UsuarioDTO {
 
 
     private String id;
+
     private String email;
+
+
+
 
     public FuncionarioDTO(Funcionario funcionario){
 
@@ -30,6 +36,7 @@ public class FuncionarioDTO extends UsuarioDTO {
         setTelefone(funcionario.getTelefone());
         setMatricula(funcionario.getMatricula());
     }
+
 
     }
 

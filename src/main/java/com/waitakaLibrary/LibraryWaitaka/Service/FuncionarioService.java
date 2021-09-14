@@ -16,6 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -25,22 +26,60 @@ public class FuncionarioService {
 
     private final FuncionarioMapper funcionarioMapper = FuncionarioMapper.INSTANCE;
 
-    public List<Funcionario> lista(){
+    public List<Funcionario> lista() {
         return funcionarioRepository.findAll();
     }
 
-  public FuncionarioDTO cadastrar(Funcionario funcionario){
-      funcionarioRepository.insert(funcionario);
+    public FuncionarioDTO cadastrar(Funcionario funcionario) {
+        funcionarioRepository.insert(funcionario);
         FuncionarioDTO funcionarioDTO = funcionarioMapper.toDTO(funcionario);
         return funcionarioDTO;
 
     }
-    public ResponseEntity<FuncionarioDTO> cadastrar(Funcionario funcionario, UriComponentsBuilder uriBuilder ){
+
+    public ResponseEntity<FuncionarioDTO> cadastrar(Funcionario funcionario, UriComponentsBuilder uriBuilder) {
         Funcionario teste = funcionarioRepository.insert(funcionario);
-        FuncionarioDTO funcionarioDTO  = funcionarioMapper.toDTO(funcionario);
+        FuncionarioDTO funcionarioDTO = funcionarioMapper.toDTO(funcionario);
         URI uri = uriBuilder.path("api/v1/funcionarios/{nome}").buildAndExpand(funcionario.getNome()).toUri();
 
         return ResponseEntity.created(uri).body(funcionarioDTO);
+
+    }
+
+    public ResponseEntity<FuncionarioDTO> atualizarPorEmail (String email, FuncionarioDTO funcionarioDTO){
+
+        Funcionario funcionarioParaSalvar = verificaSeExiste(email);
+
+        if(funcionarioDTO.getNome() != null){
+            funcionarioParaSalvar.setNome(funcionarioDTO.getNome());
+        }
+        if(funcionarioDTO.getMatricula() != null) {
+            funcionarioParaSalvar.setMatricula(funcionarioDTO.getMatricula());
+        }
+        if(funcionarioDTO.getCEP() != null) {
+            funcionarioParaSalvar.setCEP(funcionarioDTO.getCEP());
+        }
+        if(funcionarioDTO.getTelefone() != null) {
+            funcionarioParaSalvar.setTelefone(funcionarioDTO.getTelefone());
+        }
+
+        Funcionario funcionario = funcionarioRepository.save(funcionarioParaSalvar);
+        FuncionarioDTO funcionarioSalvoDTO = new FuncionarioDTO(funcionario);
+
+        return ResponseEntity.ok(funcionarioSalvoDTO);
+
+    }
+
+
+
+    private Funcionario verificaSeExiste(String email) {
+        Optional<Funcionario> funcionario = funcionarioRepository.findByEmail(email);
+        if (funcionario.isPresent()) {
+            return funcionario.get();
+        } else {
+            throw new IllegalStateException("Funcionario não existe");
+        }
+
 
     }
 }

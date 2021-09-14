@@ -45,14 +45,22 @@ public class EstudanteService {
 
         Estudante estudanteParaSalvar = verificaSeExiste(email);
 
+        if(estudanteDTO.getNome() != null){
+            estudanteParaSalvar.setNome(estudanteDTO.getNome());
+        }
+        if(estudanteDTO.getMatricula() != null) {
+            estudanteParaSalvar.setMatricula(estudanteDTO.getMatricula());
+        }
+        if(estudanteDTO.getCEP() != null) {
+            estudanteParaSalvar.setCEP(estudanteDTO.getCEP());
+        }
+        if(estudanteDTO.getTelefone() != null) {
+            estudanteParaSalvar.setTelefone(estudanteDTO.getTelefone());
+        }
 
-
-        estudanteParaSalvar.setNome(estudanteDTO.getNome());
-        estudanteParaSalvar.setMatricula(estudanteDTO.getMatricula());
-        estudanteParaSalvar.setCEP(estudanteDTO.getCEP());
-        estudanteParaSalvar.setTelefone(estudanteDTO.getTelefone());
 
         Estudante estudanteSalvo = estudanteRepository.save(estudanteParaSalvar);
+
         EstudanteDTO EstudanteSalvoDTO = new EstudanteDTO(estudanteSalvo);
 
         return ResponseEntity.ok(EstudanteSalvoDTO);

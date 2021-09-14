@@ -14,13 +14,9 @@ import javax.validation.constraints.NotNull;
 @Data
 abstract class UsuarioDTO {
 
-    @NotNull(message ="Nome não pode ser nulo")
     private String nome;
-    @NotNull(message ="Telefone não pode ser nulo")
     private String telefone;
-    @NotNull(message ="Matricula não pode ser nulo")
     private Integer matricula;
-    @NotNull(message ="CEP não pode ser nulo")
     private String CEP;
 
     private Profile profile;

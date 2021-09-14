@@ -36,4 +36,9 @@ public class FuncionarioController {
     }
 
 
+    @PutMapping("{email}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity<FuncionarioDTO> atualizarPorEmail(@PathVariable @Valid String email, @RequestBody FuncionarioDTO funcionarioDTO){
+        return funcionarioService.atualizarPorEmail(email, funcionarioDTO);
+    }
 }
