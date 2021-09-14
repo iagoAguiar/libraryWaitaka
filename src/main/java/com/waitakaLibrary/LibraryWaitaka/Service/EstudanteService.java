@@ -12,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -39,6 +40,39 @@ public class EstudanteService {
         return ResponseEntity.created(uri).body(estudanteDTO);
 
     }
+
+    public ResponseEntity<EstudanteDTO> atualizarPorEmail (String email, EstudanteDTO estudanteDTO){
+
+        Estudante estudanteParaSalvar = verificaSeExiste(email);
+
+
+
+        estudanteParaSalvar.setNome(estudanteDTO.getNome());
+        estudanteParaSalvar.setMatricula(estudanteDTO.getMatricula());
+        estudanteParaSalvar.setCEP(estudanteDTO.getCEP());
+        estudanteParaSalvar.setTelefone(estudanteDTO.getTelefone());
+
+        Estudante estudanteSalvo = estudanteRepository.save(estudanteParaSalvar);
+        EstudanteDTO EstudanteSalvoDTO = new EstudanteDTO(estudanteSalvo);
+
+        return ResponseEntity.ok(EstudanteSalvoDTO);
+
+
+    }
+
+
+
+    private Estudante verificaSeExiste(String email){
+        Optional<Estudante> estudante =  estudanteRepository.findByEmail(email);
+        if (estudante.isPresent()){
+          return estudante.get();
+        } else {
+            throw new IllegalStateException("Estudante não existe");
+        }
+
+    }
+
+
 }
 
 

@@ -4,7 +4,6 @@ import com.waitakaLibrary.LibraryWaitaka.Builder.AluguelBuilder;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Aluguel;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.AluguelDTO;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -18,9 +17,6 @@ public class TestesAluguel {
 
 
     DateTimeFormatter $format1 = DateTimeFormatter.ofPattern("dd/MM/yyy");
-
-
-
 
     @Test
     void testeNovoAluguelEstudante() {

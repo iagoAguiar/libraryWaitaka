@@ -35,5 +35,12 @@ public class EstudanteController {
         return estudanteService.cadastrar(estudante, uriBuilder);
     }
 
+    @PutMapping("{email}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity<EstudanteDTO> atualizarPorEmail(@PathVariable @Valid String email, @RequestBody @Valid EstudanteDTO estudanteDTO){
+
+        return estudanteService.atualizarPorEmail(email, estudanteDTO);
+    }
+
 
 }

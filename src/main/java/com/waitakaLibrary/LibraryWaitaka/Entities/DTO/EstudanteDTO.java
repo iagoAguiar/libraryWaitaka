@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 
 @Data
 @Builder
@@ -17,6 +20,7 @@ public class EstudanteDTO extends UsuarioDTO {
 
 
     private String id;
+    @NotNull(message ="Email não pode ser nulo")
     private String email;
 
     public EstudanteDTO(Estudante estudante){
