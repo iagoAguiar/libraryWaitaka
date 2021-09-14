@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public abstract class Usuario {
     @NotNull(message = "Nome não pode ser vazio")
     private String nome;
-        @NotNull(message = "Telefone não pode ser vazio")
+    @NotNull(message = "Telefone não pode ser vazio")
     private String telefone;
     @NotNull(message = "Matricula não pode ser vazio")
     private Integer matricula;

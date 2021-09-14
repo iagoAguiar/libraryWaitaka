@@ -1,6 +1,7 @@
 package com.waitakaLibrary.LibraryWaitaka.Controllers;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
+import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.FuncionarioDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Service.EstudanteService;
 import lombok.AllArgsConstructor;
@@ -41,6 +42,14 @@ public class EstudanteController {
 
         return estudanteService.atualizarPorEmail(email, estudanteDTO);
     }
+
+    @DeleteMapping("{email}")
+    @Transactional
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<EstudanteDTO> deletar(@PathVariable String email ){
+        return estudanteService.deletarPorEmail(email);
+    }
+
 
 
 }

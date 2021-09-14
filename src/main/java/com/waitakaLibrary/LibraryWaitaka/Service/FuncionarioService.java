@@ -2,8 +2,10 @@ package com.waitakaLibrary.LibraryWaitaka.Service;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.FuncionarioDTO;
+import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.ProfessorDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
 import com.waitakaLibrary.LibraryWaitaka.Repository.EstudanteRepository;
 import com.waitakaLibrary.LibraryWaitaka.Repository.FuncionarioRepository;
 import com.waitakaLibrary.LibraryWaitaka.mappers.EstudanteMapper;
@@ -70,6 +72,12 @@ public class FuncionarioService {
 
     }
 
+    public ResponseEntity<FuncionarioDTO> deletarPorEmail (String email){
+        Funcionario funcionarioParaDeletar = verificaSeExiste(email);
+        funcionarioRepository.deleteById(funcionarioParaDeletar.getId());
+        FuncionarioDTO funcionarioDeletadoDTO = new FuncionarioDTO(funcionarioParaDeletar);
+        return ResponseEntity.ok(funcionarioDeletadoDTO);
+    }
 
 
     private Funcionario verificaSeExiste(String email) {
