@@ -119,7 +119,7 @@ public class TesteServicesRepositories {
 
 
     @Test
-    void testeFuncionarioService() {
+    void testeCadastrarFuncionarioService() {
         Funcionario funcionario = UsuarioBuilder.builder().build().toFuncionario();
         FuncionarioDTO funcionarioDTO = new FuncionarioDTO(funcionario);
         Mockito.when(funcionarioService.cadastrar(funcionario)).thenReturn(funcionarioDTO);
@@ -128,7 +128,33 @@ public class TesteServicesRepositories {
     }
 
     @Test
-    void testeFuncionarioServiceComURI() {
+    void testeDeletarFuncionarioService() {
+        Funcionario funcionario = UsuarioBuilder.builder().build().toFuncionario();
+        FuncionarioDTO funcionarioDTO = new FuncionarioDTO(funcionario);
+
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString("api/v1/funcionarios/{nome}");
+        URI uri = UriComponentsBuilder.fromUriString("api/v1/funcionarios/{nome}")
+                .buildAndExpand(funcionario.getNome()).toUri();
+        Mockito.when(funcionarioService.deletarPorEmail(funcionario.getEmail()))
+                .thenReturn(ResponseEntity.created(uri).body(funcionarioDTO));
+    }
+
+    @Test
+    void testeAtualizarFuncionarioService() {
+        Funcionario funcionario = UsuarioBuilder.builder().build().toFuncionario();
+        FuncionarioDTO funcionarioDTO = new FuncionarioDTO(funcionario);
+        funcionarioDTO.setNome("TESTEEEEE");
+
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString("api/v1/funcionarios/{nome}");
+        URI uri = UriComponentsBuilder.fromUriString("api/v1/funcionarios/{nome}")
+                .buildAndExpand(funcionario.getNome()).toUri();
+        Mockito.when(funcionarioService.atualizarPorEmail(funcionario.getEmail(),funcionarioDTO))
+                .thenReturn(ResponseEntity.created(uri).body(funcionarioDTO));
+    }
+
+
+    @Test
+    void testeCadastrarFuncionarioServiceComURI() {
         Funcionario funcionario = UsuarioBuilder.builder().build().toFuncionario();
         FuncionarioDTO funcionarioDTO = new FuncionarioDTO(funcionario);
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString("api/v1/funcionarios/{nome}");
@@ -141,7 +167,7 @@ public class TesteServicesRepositories {
 
 
     @Test
-    void testeAluguelService(){
+    void testeCadastrarAluguelService(){
         Aluguel aluguel = AluguelBuilder.builder().build().toAlguelEstudante();
         AluguelForm aluguelForm = AluguelBuilder.builder().build().toAluguelForm();
         AluguelDTO aluguelDTO = new AluguelDTO(aluguel);
@@ -153,7 +179,6 @@ public class TesteServicesRepositories {
 
         Mockito.when(aluguelService.cadastrar(aluguelForm, uriBuilder))
                 .thenReturn(ResponseEntity.created(uri).body(aluguelDTO));
-
     }
 
 

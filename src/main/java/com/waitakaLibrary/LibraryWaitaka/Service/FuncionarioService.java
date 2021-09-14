@@ -85,7 +85,7 @@ public class FuncionarioService {
         if (funcionario.isPresent()) {
             return funcionario.get();
         } else {
-            throw new IllegalStateException("Funcionario não existe");
+            throw new IllegalStateException("Funcionário não existe");
         }
 
 
