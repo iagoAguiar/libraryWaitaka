@@ -1,9 +1,8 @@
 package com.waitakaLibrary.LibraryWaitaka.Service;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.FuncionarioDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoHandler;
 import com.waitakaLibrary.LibraryWaitaka.Repository.EstudanteRepository;
 import com.waitakaLibrary.LibraryWaitaka.mappers.EstudanteMapper;
 import lombok.AllArgsConstructor;
@@ -43,7 +42,7 @@ public class EstudanteService {
 
     }
 
-    public ResponseEntity<EstudanteDTO> atualizarPorEmail (String email, EstudanteDTO estudanteDTO){
+    public ResponseEntity<EstudanteDTO> atualizarPorEmail (String email, EstudanteDTO estudanteDTO) throws UsuarioNaoEncontradoHandler {
 
         Estudante estudanteParaSalvar = verificaSeExiste(email);
 
@@ -68,7 +67,7 @@ public class EstudanteService {
 
     }
 
-    public ResponseEntity<EstudanteDTO> deletarPorEmail (String email){
+    public ResponseEntity<EstudanteDTO> deletarPorEmail (String email) throws UsuarioNaoEncontradoHandler {
         Estudante estudanteParaDeletar = verificaSeExiste(email);
         estudanteRepository.deleteById(estudanteParaDeletar.getId());
         EstudanteDTO estudanteDeletadoDTO = new EstudanteDTO(estudanteParaDeletar);
@@ -78,12 +77,12 @@ public class EstudanteService {
 
 
 
-    private Estudante verificaSeExiste(String email){
+    private Estudante verificaSeExiste(String email) throws UsuarioNaoEncontradoHandler {
         Optional<Estudante> estudante =  estudanteRepository.findByEmail(email);
         if (estudante.isPresent()){
           return estudante.get();
         } else {
-            throw new IllegalStateException("Estudante não existe");
+            throw new UsuarioNaoEncontradoHandler(email);
         }
 
     }

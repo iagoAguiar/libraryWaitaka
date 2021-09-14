@@ -2,13 +2,12 @@ package com.waitakaLibrary.LibraryWaitaka.Service;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.*;
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.AluguelDTO;
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Form.AluguelForm;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoHandler;
 import com.waitakaLibrary.LibraryWaitaka.Repository.AluguelRepository;
 import com.waitakaLibrary.LibraryWaitaka.Repository.EstudanteRepository;
 import com.waitakaLibrary.LibraryWaitaka.Repository.FuncionarioRepository;
 import com.waitakaLibrary.LibraryWaitaka.Repository.ProfessorRepository;
-import com.waitakaLibrary.LibraryWaitaka.mappers.EstudanteMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +42,7 @@ public class AluguelService {
 
     }
 
-    public ResponseEntity<AluguelDTO> cadastrar(AluguelForm aluguelForm, UriComponentsBuilder uriBuilder ){
+    public ResponseEntity<AluguelDTO> cadastrar(AluguelForm aluguelForm, UriComponentsBuilder uriBuilder ) throws UsuarioNaoEncontradoHandler {
 
         Usuario usuario = getUsuario(aluguelForm);
 
@@ -58,7 +57,7 @@ public class AluguelService {
 
     }
 
-    private Usuario getUsuario(AluguelForm aluguelForm) {
+    private Usuario getUsuario(AluguelForm aluguelForm) throws UsuarioNaoEncontradoHandler {
 
         Optional<Funcionario> funcionario = funcionarioRepository.findByEmail(aluguelForm.getEmailusuario());
         if(funcionario.isPresent()) {
@@ -80,7 +79,7 @@ public class AluguelService {
           return usuario;
         }
         else{
-            return null;
+            throw new UsuarioNaoEncontradoHandler(aluguelForm.getEmailusuario());
         }
     }
 

@@ -1,8 +1,8 @@
 package com.waitakaLibrary.LibraryWaitaka.Controllers;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.FuncionarioDTO;
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.ProfessorDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoHandler;
 import com.waitakaLibrary.LibraryWaitaka.Service.FuncionarioService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +39,13 @@ public class FuncionarioController {
 
     @PutMapping("{email}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<FuncionarioDTO> atualizarPorEmail(@PathVariable @Valid String email, @RequestBody FuncionarioDTO funcionarioDTO){
+    public ResponseEntity<FuncionarioDTO> atualizarPorEmail(@PathVariable @Valid String email, @RequestBody FuncionarioDTO funcionarioDTO) throws UsuarioNaoEncontradoHandler {
         return funcionarioService.atualizarPorEmail(email, funcionarioDTO);
     }
     @DeleteMapping("{email}")
     @Transactional
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<FuncionarioDTO> deletar(@PathVariable String email ){
+    public ResponseEntity<FuncionarioDTO> deletar(@PathVariable String email ) throws UsuarioNaoEncontradoHandler {
         return funcionarioService.deletarPorEmail(email);
     }
 

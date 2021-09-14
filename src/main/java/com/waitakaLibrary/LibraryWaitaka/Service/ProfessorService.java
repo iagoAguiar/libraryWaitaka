@@ -1,14 +1,9 @@
 package com.waitakaLibrary.LibraryWaitaka.Service;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.FuncionarioDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.ProfessorDTO;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
-import com.waitakaLibrary.LibraryWaitaka.Repository.EstudanteRepository;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoHandler;
 import com.waitakaLibrary.LibraryWaitaka.Repository.ProfessorRepository;
-import com.waitakaLibrary.LibraryWaitaka.mappers.EstudanteMapper;
 import com.waitakaLibrary.LibraryWaitaka.mappers.ProfessorMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +42,7 @@ public class ProfessorService {
 
     }
 
-    public ResponseEntity<ProfessorDTO> atualizarPorEmail (String email, ProfessorDTO professorDTO){
+    public ResponseEntity<ProfessorDTO> atualizarPorEmail (String email, ProfessorDTO professorDTO) throws UsuarioNaoEncontradoHandler {
 
         Professor professorParaSalvar = verificaSeExiste(email);
 
@@ -72,19 +67,19 @@ public class ProfessorService {
     }
 
 
-    public ResponseEntity<ProfessorDTO> deletarPorEmail (String email){
+    public ResponseEntity<ProfessorDTO> deletarPorEmail (String email) throws UsuarioNaoEncontradoHandler {
         Professor professorParadeletar = verificaSeExiste(email);
         professorRepository.deleteById(professorParadeletar.getId());
         ProfessorDTO professorDeletadoDTO = new ProfessorDTO(professorParadeletar);
         return ResponseEntity.ok(professorDeletadoDTO);
     }
 
-    private Professor verificaSeExiste(String email) {
+    private Professor verificaSeExiste(String email) throws UsuarioNaoEncontradoHandler {
         Optional<Professor> professor = professorRepository.findByEmail(email);
         if (professor.isPresent()) {
             return professor.get();
         } else {
-            throw new IllegalStateException("Professor não existe");
+            throw new UsuarioNaoEncontradoHandler(email);
         }
 
 
