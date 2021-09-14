@@ -44,5 +44,11 @@ public class ProfessorController {
         return professorService.atualizarPorEmail(email, professorDTO);
     }
 
+    @DeleteMapping("{email}")
+    @Transactional
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ProfessorDTO> deletar(@PathVariable String email ){
+        return professorService.deletarPorEmail(email);
+    }
 
 }

@@ -1,7 +1,9 @@
 package com.waitakaLibrary.LibraryWaitaka.Service;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
+import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.FuncionarioDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
 import com.waitakaLibrary.LibraryWaitaka.Repository.EstudanteRepository;
 import com.waitakaLibrary.LibraryWaitaka.mappers.EstudanteMapper;
 import lombok.AllArgsConstructor;
@@ -60,13 +62,19 @@ public class EstudanteService {
 
 
         Estudante estudanteSalvo = estudanteRepository.save(estudanteParaSalvar);
-
         EstudanteDTO EstudanteSalvoDTO = new EstudanteDTO(estudanteSalvo);
-
         return ResponseEntity.ok(EstudanteSalvoDTO);
 
 
     }
+
+    public ResponseEntity<EstudanteDTO> deletarPorEmail (String email){
+        Estudante estudanteParaDeletar = verificaSeExiste(email);
+        estudanteRepository.deleteById(estudanteParaDeletar.getId());
+        EstudanteDTO estudanteDeletadoDTO = new EstudanteDTO(estudanteParaDeletar);
+        return ResponseEntity.ok(estudanteDeletadoDTO);
+    }
+
 
 
 

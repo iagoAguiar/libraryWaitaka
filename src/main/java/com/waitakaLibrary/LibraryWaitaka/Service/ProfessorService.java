@@ -71,12 +71,20 @@ public class ProfessorService {
 
     }
 
+
+    public ResponseEntity<ProfessorDTO> deletarPorEmail (String email){
+        Professor professorParadeletar = verificaSeExiste(email);
+        professorRepository.deleteById(professorParadeletar.getId());
+        ProfessorDTO professorDeletadoDTO = new ProfessorDTO(professorParadeletar);
+        return ResponseEntity.ok(professorDeletadoDTO);
+    }
+
     private Professor verificaSeExiste(String email) {
         Optional<Professor> professor = professorRepository.findByEmail(email);
         if (professor.isPresent()) {
             return professor.get();
         } else {
-            throw new IllegalStateException("Funcionario não existe");
+            throw new IllegalStateException("Professor não existe");
         }
 
 
