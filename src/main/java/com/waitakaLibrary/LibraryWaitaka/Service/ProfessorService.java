@@ -1,8 +1,10 @@
 package com.waitakaLibrary.LibraryWaitaka.Service;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
+import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.FuncionarioDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.ProfessorDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
 import com.waitakaLibrary.LibraryWaitaka.Repository.EstudanteRepository;
 import com.waitakaLibrary.LibraryWaitaka.Repository.ProfessorRepository;
@@ -16,6 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -41,6 +44,41 @@ public class ProfessorService {
         URI uri = uriBuilder.path("api/v1/professores/{nome}").buildAndExpand(professor.getNome()).toUri();
 
         return ResponseEntity.created(uri).body(professorDTO);
+
+    }
+
+    public ResponseEntity<ProfessorDTO> atualizarPorEmail (String email, ProfessorDTO professorDTO){
+
+        Professor professorParaSalvar = verificaSeExiste(email);
+
+        if(professorDTO.getNome() != null){
+            professorParaSalvar.setNome(professorDTO.getNome());
+        }
+        if(professorDTO.getMatricula() != null) {
+            professorParaSalvar.setMatricula(professorDTO.getMatricula());
+        }
+        if(professorDTO.getCEP() != null) {
+            professorParaSalvar.setCEP(professorDTO.getCEP());
+        }
+        if(professorDTO.getTelefone() != null) {
+            professorParaSalvar.setTelefone(professorDTO.getTelefone());
+        }
+
+        Professor professor = professorRepository.save(professorParaSalvar);
+        ProfessorDTO professorSalvoDTO = new ProfessorDTO(professor);
+
+        return ResponseEntity.ok(professorSalvoDTO);
+
+    }
+
+    private Professor verificaSeExiste(String email) {
+        Optional<Professor> professor = professorRepository.findByEmail(email);
+        if (professor.isPresent()) {
+            return professor.get();
+        } else {
+            throw new IllegalStateException("Funcionario não existe");
+        }
+
 
     }
 }

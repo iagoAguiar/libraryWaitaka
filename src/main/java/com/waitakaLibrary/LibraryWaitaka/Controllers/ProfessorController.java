@@ -1,6 +1,7 @@
 package com.waitakaLibrary.LibraryWaitaka.Controllers;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
+import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.FuncionarioDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.ProfessorDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
@@ -36,6 +37,11 @@ public class ProfessorController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ProfessorDTO> cadastrar(@RequestBody @Valid Professor professor, UriComponentsBuilder uriBuilder){
         return professorService.cadastrar(professor, uriBuilder);
+    }
+    @PutMapping("{email}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity<ProfessorDTO> atualizarPorEmail(@PathVariable @Valid String email, @RequestBody ProfessorDTO professorDTO){
+        return professorService.atualizarPorEmail(email, professorDTO);
     }
 
 
