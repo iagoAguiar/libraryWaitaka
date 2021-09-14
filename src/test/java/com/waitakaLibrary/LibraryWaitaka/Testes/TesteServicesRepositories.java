@@ -1,15 +1,20 @@
 package com.waitakaLibrary.LibraryWaitaka.Testes;
 
+import com.waitakaLibrary.LibraryWaitaka.Builder.AluguelBuilder;
 import com.waitakaLibrary.LibraryWaitaka.Builder.UsuarioBuilder;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Aluguel;
+import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.AluguelDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.FuncionarioDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.ProfessorDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Form.AluguelForm;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
 import com.waitakaLibrary.LibraryWaitaka.Repository.EstudanteRepository;
 import com.waitakaLibrary.LibraryWaitaka.Repository.FuncionarioRepository;
 import com.waitakaLibrary.LibraryWaitaka.Repository.ProfessorRepository;
+import com.waitakaLibrary.LibraryWaitaka.Service.AluguelService;
 import com.waitakaLibrary.LibraryWaitaka.Service.EstudanteService;
 import com.waitakaLibrary.LibraryWaitaka.Service.FuncionarioService;
 import com.waitakaLibrary.LibraryWaitaka.Service.ProfessorService;
@@ -58,6 +63,12 @@ public class TesteServicesRepositories {
     @Autowired
     @MockBean
     private FuncionarioService funcionarioService;
+
+//    Aluguel
+
+    @Autowired
+    @MockBean
+    AluguelService aluguelService;
 
     @Test
     void testeEstudanteServiceEService() {
@@ -126,6 +137,23 @@ public class TesteServicesRepositories {
 
         Mockito.when(funcionarioService.cadastrar(funcionario, uriBuilder))
                 .thenReturn(ResponseEntity.created(uri).body(funcionarioDTO));
+    }
+
+
+    @Test
+    void testeAluguelService(){
+        Aluguel aluguel = AluguelBuilder.builder().build().toAlguelEstudante();
+        AluguelForm aluguelForm = AluguelBuilder.builder().build().toAluguelForm();
+        AluguelDTO aluguelDTO = new AluguelDTO(aluguel);
+        Funcionario funcionario = UsuarioBuilder.builder().build().toFuncionario();
+
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString("api/v1/funcionarios/{nome}");
+        URI uri = UriComponentsBuilder.fromUriString("api/v1/funcionarios/{nome}")
+                .buildAndExpand(funcionario.getNome()).toUri();
+
+        Mockito.when(aluguelService.cadastrar(aluguelForm, uriBuilder))
+                .thenReturn(ResponseEntity.created(uri).body(aluguelDTO));
+
     }
 
 

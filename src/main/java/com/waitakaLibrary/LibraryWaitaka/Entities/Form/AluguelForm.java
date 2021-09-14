@@ -7,6 +7,8 @@ import lombok.Data;
 @Data
 public class AluguelForm {
 
+
+
     private String titulo;
 
     private String autor;

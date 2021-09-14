@@ -42,15 +42,12 @@ public class AluguelService {
         return aluguelDTO;
 
     }
+
     public ResponseEntity<AluguelDTO> cadastrar(AluguelForm aluguelForm, UriComponentsBuilder uriBuilder ){
 
         Usuario usuario = getUsuario(aluguelForm);
 
-
-
         Aluguel aluguel = aluguelForm.toAluguel(usuario);
-
-
 
         aluguelRepository.insert(aluguel);
             AluguelDTO aluguelDTO = new AluguelDTO(aluguel);

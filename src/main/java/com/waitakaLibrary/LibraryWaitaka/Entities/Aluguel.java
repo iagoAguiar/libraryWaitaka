@@ -42,8 +42,6 @@ public class Aluguel {
    private Usuario usuario;
 
 
-
-
     public Aluguel(
             String titulo,
             String autor,
@@ -55,11 +53,11 @@ public class Aluguel {
         this.autor = autor;
         this.editora = editora;
         this.usuario = usuario;
-        this.edicao = edicao.toString();
+        this.edicao = edicao;
         this.lancamento = lancamento;
 
 
-        defineDatas(usuario, diaAluguel.toString());
+        defineDatas(usuario, diaAluguel);
     }
 
 
