@@ -2,9 +2,8 @@ package com.waitakaLibrary.LibraryWaitaka.Controllers;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.Aluguel;
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.AluguelDTO;
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.FuncionarioDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Form.AluguelForm;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoHandler;
 import com.waitakaLibrary.LibraryWaitaka.Service.AluguelService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class AluguelController {
     @PostMapping
     @Transactional
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<AluguelDTO> cadastrar(@RequestBody @Valid AluguelForm aluguel, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<AluguelDTO> cadastrar(@RequestBody @Valid AluguelForm aluguel, UriComponentsBuilder uriBuilder) throws UsuarioNaoEncontradoHandler {
         return aluguelService.cadastrar(aluguel, uriBuilder);
     }
 

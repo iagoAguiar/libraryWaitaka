@@ -11,6 +11,7 @@ import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Form.AluguelForm;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoHandler;
 import com.waitakaLibrary.LibraryWaitaka.Repository.EstudanteRepository;
 import com.waitakaLibrary.LibraryWaitaka.Repository.FuncionarioRepository;
 import com.waitakaLibrary.LibraryWaitaka.Repository.ProfessorRepository;
@@ -128,7 +129,7 @@ public class TesteServicesRepositories {
     }
 
     @Test
-    void testeDeletarFuncionarioService() {
+    void testeDeletarFuncionarioService() throws UsuarioNaoEncontradoHandler {
         Funcionario funcionario = UsuarioBuilder.builder().build().toFuncionario();
         FuncionarioDTO funcionarioDTO = new FuncionarioDTO(funcionario);
 
@@ -140,7 +141,7 @@ public class TesteServicesRepositories {
     }
 
     @Test
-    void testeAtualizarFuncionarioService() {
+    void testeAtualizarFuncionarioService() throws UsuarioNaoEncontradoHandler {
         Funcionario funcionario = UsuarioBuilder.builder().build().toFuncionario();
         FuncionarioDTO funcionarioDTO = new FuncionarioDTO(funcionario);
         funcionarioDTO.setNome("TESTEEEEE");
@@ -167,7 +168,7 @@ public class TesteServicesRepositories {
 
 
     @Test
-    void testeCadastrarAluguelService(){
+    void testeCadastrarAluguelService() throws UsuarioNaoEncontradoHandler {
         Aluguel aluguel = AluguelBuilder.builder().build().toAlguelEstudante();
         AluguelForm aluguelForm = AluguelBuilder.builder().build().toAluguelForm();
         AluguelDTO aluguelDTO = new AluguelDTO(aluguel);

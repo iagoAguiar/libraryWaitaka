@@ -1,14 +1,9 @@
 package com.waitakaLibrary.LibraryWaitaka.Service;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.FuncionarioDTO;
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.ProfessorDTO;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
-import com.waitakaLibrary.LibraryWaitaka.Repository.EstudanteRepository;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoHandler;
 import com.waitakaLibrary.LibraryWaitaka.Repository.FuncionarioRepository;
-import com.waitakaLibrary.LibraryWaitaka.mappers.EstudanteMapper;
 import com.waitakaLibrary.LibraryWaitaka.mappers.FuncionarioMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +43,8 @@ public class FuncionarioService {
 
     }
 
-    public ResponseEntity<FuncionarioDTO> atualizarPorEmail (String email, FuncionarioDTO funcionarioDTO){
+    public ResponseEntity<FuncionarioDTO> atualizarPorEmail (String email, FuncionarioDTO funcionarioDTO)
+            throws UsuarioNaoEncontradoHandler {
 
         Funcionario funcionarioParaSalvar = verificaSeExiste(email);
 
@@ -72,7 +68,7 @@ public class FuncionarioService {
 
     }
 
-    public ResponseEntity<FuncionarioDTO> deletarPorEmail (String email){
+    public ResponseEntity<FuncionarioDTO> deletarPorEmail (String email) throws UsuarioNaoEncontradoHandler {
         Funcionario funcionarioParaDeletar = verificaSeExiste(email);
         funcionarioRepository.deleteById(funcionarioParaDeletar.getId());
         FuncionarioDTO funcionarioDeletadoDTO = new FuncionarioDTO(funcionarioParaDeletar);
@@ -80,12 +76,12 @@ public class FuncionarioService {
     }
 
 
-    private Funcionario verificaSeExiste(String email) {
+    private Funcionario verificaSeExiste(String email) throws UsuarioNaoEncontradoHandler {
         Optional<Funcionario> funcionario = funcionarioRepository.findByEmail(email);
         if (funcionario.isPresent()) {
             return funcionario.get();
         } else {
-            throw new IllegalStateException("Funcionário não existe");
+            throw new UsuarioNaoEncontradoHandler(email);
         }
 
 
