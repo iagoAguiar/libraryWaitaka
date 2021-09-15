@@ -3,7 +3,7 @@ package com.waitakaLibrary.LibraryWaitaka.DTO;
 
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.*;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Perfil;
 import lombok.Builder;
 import lombok.Data;
 
@@ -18,14 +18,14 @@ public class AluguelDTO {
     private String diaAluguel;
     private String dataRenovacao;
     private String usuarioNome;
-    private Profile perfilUsuario;
+    private Perfil perfilUsuario;
 
     public AluguelDTO(
           LivroDTO livroDTO,
             String diaAluguel,
             String dataRenovacao,
             String usuarioNome,
-          Profile perfilUsuario
+          Perfil perfilUsuario
             ) {
         this.livro = livroDTO;
         this.usuarioNome = usuarioNome;

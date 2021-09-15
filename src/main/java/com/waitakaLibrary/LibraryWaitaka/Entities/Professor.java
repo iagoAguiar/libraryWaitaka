@@ -1,7 +1,6 @@
 package com.waitakaLibrary.LibraryWaitaka.Entities;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
-import lombok.Builder;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Perfil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -33,7 +32,7 @@ public class Professor extends Usuario{
             Integer matricula,
             String CEP) {
         super(nome,telefone,matricula,CEP);
-        this.profile = Profile.PROFESSOR;
+        this.profile = Perfil.PROFESSOR;
         this.email = email;
     }
 

@@ -1,8 +1,7 @@
 package com.waitakaLibrary.LibraryWaitaka.DTO;
 
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Usuario;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Perfil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +22,7 @@ abstract class UsuarioDTO {
     @NotNull(message = "CEP não pode ser nulo")
     private String CEP;
 
-    protected Profile profile;
+    protected Perfil profile;
 
 
 }

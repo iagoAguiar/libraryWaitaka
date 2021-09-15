@@ -1,6 +1,6 @@
 package com.waitakaLibrary.LibraryWaitaka.Entities;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Perfil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -40,7 +40,7 @@ public class Aluguel {
             Usuario usuario) {
         this.livro = livro;
         this.usuario = usuario;
-        this.dataRenovacao = Profile.defineDatas(usuario);
+        this.dataRenovacao = Perfil.defineDatas(usuario);
     }
 
 

@@ -5,7 +5,7 @@ import com.waitakaLibrary.LibraryWaitaka.Entities.Usuario;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public enum Profile {
+public enum Perfil {
 
     PROFESSOR, ESTUDANTE, FUNCIONARIO;
 

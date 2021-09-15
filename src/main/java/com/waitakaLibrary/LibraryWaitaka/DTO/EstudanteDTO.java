@@ -1,11 +1,8 @@
 package com.waitakaLibrary.LibraryWaitaka.DTO;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Perfil;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
@@ -20,7 +17,7 @@ public class EstudanteDTO extends UsuarioDTO {
     private String email;
 
     public EstudanteDTO() {
-        this.profile = Profile.ESTUDANTE;
+        this.profile = Perfil.ESTUDANTE;
     }
 
     public EstudanteDTO(
@@ -32,10 +29,10 @@ public class EstudanteDTO extends UsuarioDTO {
                     Integer matricula,
             @NotNull(message = "CEP não pode ser nulo")
                     String CEP,
-            Profile profile,
+            Perfil profile,
             String email) {
         super(nome, telefone, matricula, CEP, profile);
-        this.profile = Profile.ESTUDANTE;
+        this.profile = Perfil.ESTUDANTE;
         this.email = email;
     }
 
@@ -43,7 +40,7 @@ public class EstudanteDTO extends UsuarioDTO {
     public EstudanteDTO(Estudante estudante){
         setNome(estudante.getNome());
         setEmail(estudante.getEmail());
-        setProfile(Profile.ESTUDANTE);
+        setProfile(Perfil.ESTUDANTE);
         setCEP(estudante.getCEP());
         setTelefone(estudante.getTelefone());
         setMatricula(estudante.getMatricula());

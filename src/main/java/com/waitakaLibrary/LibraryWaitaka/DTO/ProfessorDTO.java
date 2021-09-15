@@ -1,11 +1,8 @@
 package com.waitakaLibrary.LibraryWaitaka.DTO;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Perfil;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
@@ -17,7 +14,7 @@ public class ProfessorDTO extends UsuarioDTO {
     private String email;
 
     public ProfessorDTO() {
-        this.profile = Profile.PROFESSOR;
+        this.profile = Perfil.PROFESSOR;
     }
 
     public ProfessorDTO(
@@ -26,9 +23,9 @@ public class ProfessorDTO extends UsuarioDTO {
             Integer matricula,
             String CEP,
             String email,
-            Profile profile) {
+            Perfil profile) {
         super(nome, telefone, matricula, CEP, profile);
-        this.profile = Profile.PROFESSOR;
+        this.profile = Perfil.PROFESSOR;
         this.email = email;
     }
 
@@ -36,7 +33,7 @@ public class ProfessorDTO extends UsuarioDTO {
     public ProfessorDTO(Professor professor){
         setNome(professor.getNome());
         setEmail(professor.getEmail());
-        setProfile(Profile.PROFESSOR);
+        setProfile(Perfil.PROFESSOR);
         setCEP(professor.getCEP());
         setTelefone(professor.getTelefone());
         setMatricula(professor.getMatricula());
