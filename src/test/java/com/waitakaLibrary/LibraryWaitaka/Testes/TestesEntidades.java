@@ -2,9 +2,9 @@ package com.waitakaLibrary.LibraryWaitaka.Testes;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Livros;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Livro;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Perfil;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -27,12 +27,12 @@ public class TestesEntidades {
         assertEquals(estudante.getTelefone(), "22 9 9999-9999");
         assertEquals(estudante.getEmail(), "iagoaguiar202@gmail.com");
         assertEquals(estudante.getCEP(), "28240-965");
-        assertEquals(estudante.getProfile(), Profile.ESTUDANTE);
+        assertEquals(estudante.getProfile(), Perfil.ESTUDANTE);
     }
 
     @Test
     void testeNovoLivro(){
-        Livros livro = new Livros(
+        Livro livro = new Livro(
                 "O Alquimista",
                 "Paulo Coelho",
                 "Aleph",
@@ -57,7 +57,7 @@ public class TestesEntidades {
         assertEquals(professor.getTelefone(), "22 9 9999-9999");
         assertEquals(professor.getEmail(), "iagoaguiar202@gmail.com");
         assertEquals(professor.getCEP(), "28240-965");
-        assertEquals(professor.getProfile(), Profile.PROFESSOR);
+        assertEquals(professor.getProfile(), Perfil.PROFESSOR);
     }
 
     @Test
@@ -73,6 +73,6 @@ public class TestesEntidades {
         assertEquals(funcionario.getTelefone(), "22 9 9999-9999");
         assertEquals(funcionario.getEmail(), "iagoaguiar202@gmail.com");
         assertEquals(funcionario.getCEP(), "28240-965");
-        assertEquals(funcionario.getProfile(), Profile.FUNCIONARIO);
+        assertEquals(funcionario.getProfile(), Perfil.FUNCIONARIO);
     }
 }

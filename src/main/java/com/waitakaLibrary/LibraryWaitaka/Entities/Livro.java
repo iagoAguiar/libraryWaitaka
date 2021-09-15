@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @Document
-public class Livros {
+public class Livro {
 
     @Id
     private String id;
@@ -35,7 +35,7 @@ public class Livros {
     private String edicao;
 
     @PersistenceConstructor
-    public Livros(String titulo, String autor, String editora, String lancamento, String edicao) {
+    public Livro(String titulo, String autor, String editora, String lancamento, String edicao) {
         this.titulo = titulo;
         this.autor = autor;
         this.editora = editora;

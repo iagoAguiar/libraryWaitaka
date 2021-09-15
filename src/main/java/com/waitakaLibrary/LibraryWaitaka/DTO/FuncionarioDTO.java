@@ -1,14 +1,11 @@
-package com.waitakaLibrary.LibraryWaitaka.Entities.DTO;
+package com.waitakaLibrary.LibraryWaitaka.DTO;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Perfil;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotNull;
 
 
 @Data
@@ -19,7 +16,7 @@ public class FuncionarioDTO extends UsuarioDTO {
 
 
 
-    private String id;
+
 
     private String email;
 
@@ -28,15 +25,23 @@ public class FuncionarioDTO extends UsuarioDTO {
 
     public FuncionarioDTO(Funcionario funcionario){
 
-        this.id = funcionario.getId();
         setNome(funcionario.getNome());
         setEmail(funcionario.getEmail());
-        setProfile(Profile.FUNCIONARIO);
+        setProfile(Perfil.FUNCIONARIO);
         setCEP(funcionario.getCEP());
         setTelefone(funcionario.getTelefone());
         setMatricula(funcionario.getMatricula());
     }
 
+    public Funcionario toFuncionario(){
+        return new Funcionario(
+                this.getNome(),
+                this.getEmail(),
+                this.getTelefone(),
+                this.getMatricula(),
+                this.getCEP()
+        );
+    }
 
     }
 

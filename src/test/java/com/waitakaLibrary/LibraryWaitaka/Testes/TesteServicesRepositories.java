@@ -3,16 +3,16 @@ package com.waitakaLibrary.LibraryWaitaka.Testes;
 import com.waitakaLibrary.LibraryWaitaka.Builder.AluguelBuilder;
 import com.waitakaLibrary.LibraryWaitaka.Builder.UsuarioBuilder;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Aluguel;
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.AluguelDTO;
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.FuncionarioDTO;
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.ProfessorDTO;
+import com.waitakaLibrary.LibraryWaitaka.DTO.AluguelDTO;
+import com.waitakaLibrary.LibraryWaitaka.DTO.EstudanteDTO;
+import com.waitakaLibrary.LibraryWaitaka.DTO.FuncionarioDTO;
+import com.waitakaLibrary.LibraryWaitaka.DTO.ProfessorDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Form.AluguelForm;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
-import com.waitakaLibrary.LibraryWaitaka.Exceptions.LivroNaoLocalizadoHandler;
-import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoHandler;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.LivroNaoLocalizadoException;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoException;
 import com.waitakaLibrary.LibraryWaitaka.Repository.EstudanteRepository;
 import com.waitakaLibrary.LibraryWaitaka.Repository.FuncionarioRepository;
 import com.waitakaLibrary.LibraryWaitaka.Repository.ProfessorRepository;
@@ -89,7 +89,7 @@ public class TesteServicesRepositories {
         URI uri = UriComponentsBuilder.fromUriString("api/v1/estudantes/{nome}")
                 .buildAndExpand(estudante.getNome()).toUri();
 
-        Mockito.when(estudanteService.cadastrar(estudante, uriBuilder))
+        Mockito.when(estudanteService.cadastrar(estudanteDTO, uriBuilder))
                 .thenReturn(ResponseEntity.created(uri).body(estudanteDTO));
     }
 
@@ -113,7 +113,7 @@ public class TesteServicesRepositories {
         URI uri = UriComponentsBuilder.fromUriString("api/v1/professores/{nome}")
                 .buildAndExpand(professor.getNome()).toUri();
 
-        Mockito.when(professorService.cadastrar(professor, uriBuilder))
+        Mockito.when(professorService.cadastrar(professorDTO, uriBuilder))
                 .thenReturn(ResponseEntity.created(uri).body(professorDTO));
     }
 
@@ -130,7 +130,7 @@ public class TesteServicesRepositories {
     }
 
     @Test
-    void testeDeletarFuncionarioService() throws UsuarioNaoEncontradoHandler {
+    void testeDeletarFuncionarioService() throws UsuarioNaoEncontradoException {
         Funcionario funcionario = UsuarioBuilder.builder().build().toFuncionario();
         FuncionarioDTO funcionarioDTO = new FuncionarioDTO(funcionario);
 
@@ -142,7 +142,7 @@ public class TesteServicesRepositories {
     }
 
     @Test
-    void testeAtualizarFuncionarioService() throws UsuarioNaoEncontradoHandler {
+    void testeAtualizarFuncionarioService() throws UsuarioNaoEncontradoException {
         Funcionario funcionario = UsuarioBuilder.builder().build().toFuncionario();
         FuncionarioDTO funcionarioDTO = new FuncionarioDTO(funcionario);
         funcionarioDTO.setNome("TESTEEEEE");
@@ -163,15 +163,15 @@ public class TesteServicesRepositories {
         URI uri = UriComponentsBuilder.fromUriString("api/v1/funcionarios/{nome}")
                 .buildAndExpand(funcionario.getNome()).toUri();
 
-        Mockito.when(funcionarioService.cadastrar(funcionario, uriBuilder))
+        Mockito.when(funcionarioService.cadastrar(funcionarioDTO, uriBuilder))
                 .thenReturn(ResponseEntity.created(uri).body(funcionarioDTO));
     }
 
 
     @Test
-    void testeCadastrarAluguelService() throws UsuarioNaoEncontradoHandler, LivroNaoLocalizadoHandler {
+    void testeCadastrarAluguelService() throws UsuarioNaoEncontradoException, LivroNaoLocalizadoException {
         Aluguel aluguel = AluguelBuilder.builder().build().toAlguelEstudante();
-        AluguelForm aluguelForm = AluguelBuilder.builder().build().toAluguelForm();
+        Estudante estudante = (Estudante) aluguel.getUsuario();
         AluguelDTO aluguelDTO = new AluguelDTO(aluguel);
         Funcionario funcionario = UsuarioBuilder.builder().build().toFuncionario();
 
@@ -179,7 +179,7 @@ public class TesteServicesRepositories {
         URI uri = UriComponentsBuilder.fromUriString("api/v1/funcionarios/{nome}")
                 .buildAndExpand(funcionario.getNome()).toUri();
 
-        Mockito.when(aluguelService.cadastrar(aluguelForm.getEmail(), aluguelForm.getEmail(), uriBuilder))
+        Mockito.when(aluguelService.cadastrar(estudante.getEmail(), estudante.getEmail(), uriBuilder))
                 .thenReturn(ResponseEntity.created(uri).body(aluguelDTO));
     }
 

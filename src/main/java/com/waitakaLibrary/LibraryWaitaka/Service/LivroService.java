@@ -1,9 +1,9 @@
 package com.waitakaLibrary.LibraryWaitaka.Service;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.*;
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.LivroDTO;
+import com.waitakaLibrary.LibraryWaitaka.DTO.LivroDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Form.LivroForm;
-import com.waitakaLibrary.LibraryWaitaka.Exceptions.LivroNaoLocalizadoHandler;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.LivroNaoLocalizadoException;
 
 import com.waitakaLibrary.LibraryWaitaka.Repository.*;
 import lombok.AllArgsConstructor;
@@ -15,6 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -24,11 +25,14 @@ public class LivroService {
 
 
 
-    public List<Livros> lista(){
-        return livroRepository.findAll();
+    public List<LivroDTO> listar(){
+        List<Livro> livros = livroRepository.findAll();
+        List<LivroDTO> livrosDTO = livros.stream().map(model -> new LivroDTO(model)).collect(Collectors.toList());
+
+        return livrosDTO;
     }
 
-  public LivroDTO cadastrar(Livros livro){
+  public LivroDTO cadastrar(Livro livro){
         livroRepository.insert(livro);
       LivroDTO livroDTO = new LivroDTO(livro);
         return livroDTO;
@@ -38,7 +42,7 @@ public class LivroService {
     public ResponseEntity<LivroDTO> cadastrar(LivroForm livroForm, UriComponentsBuilder uriBuilder ){
 
 
-        Livros livro = livroForm.toLivro();
+        Livro livro = livroForm.toLivro();
 
         livroRepository.insert(livro);
         LivroDTO livroDTO = new LivroDTO(livro);
@@ -49,22 +53,22 @@ public class LivroService {
 
     }
 
-    public Livros getLivro(LivroForm livroForm) throws LivroNaoLocalizadoHandler {
+    public Livro getLivro(LivroForm livroForm) throws LivroNaoLocalizadoException {
 
-        Optional<Livros> livro = livroRepository.findByTitulo(livroForm.getTitulo());
+        Optional<Livro> livro = livroRepository.findByTitulo(livroForm.getTitulo());
         if(livro.isPresent()) {
-            Livros usuario = livro.get();
+            Livro usuario = livro.get();
             return usuario;
 
         } else{
-            throw new LivroNaoLocalizadoHandler(livro.get().getTitulo());
+            throw new LivroNaoLocalizadoException(livro.get().getTitulo());
         }
     }
 
-    public ResponseEntity<LivroDTO> atualizarPorTitulo(String titulo, LivroDTO livroDTO) throws LivroNaoLocalizadoHandler {
+    public ResponseEntity<LivroDTO> atualizarPorTitulo(String titulo, LivroDTO livroDTO) throws LivroNaoLocalizadoException {
 
 
-        Livros livroParaSalvar = verificarSeExiste(titulo);
+        Livro livroParaSalvar = verificarSeExiste(titulo);
 
         if (livroDTO.getTitulo() != null){
             livroParaSalvar.setTitulo(livroDTO.getTitulo());
@@ -83,13 +87,13 @@ public class LivroService {
         }
 
 
-        Livros livroSalvo = livroRepository.save(livroParaSalvar);
+        Livro livroSalvo = livroRepository.save(livroParaSalvar);
         LivroDTO livroSalvoDTO = new LivroDTO(livroSalvo);
         return ResponseEntity.ok(livroSalvoDTO);
 
     }
-    public ResponseEntity<LivroDTO> deletaPorTitulo(String titulo) throws LivroNaoLocalizadoHandler {
-        Livros livroParaDeletar = verificarSeExiste(titulo);
+    public ResponseEntity<LivroDTO> deletarPorTitulo(String titulo) throws LivroNaoLocalizadoException {
+        Livro livroParaDeletar = verificarSeExiste(titulo);
         livroRepository.deleteById(livroParaDeletar.getId());
         LivroDTO livroDeletadoDTO = new LivroDTO(livroParaDeletar);
         return ResponseEntity.ok(livroDeletadoDTO);
@@ -97,10 +101,10 @@ public class LivroService {
     }
 
 
-    private Livros verificarSeExiste(String titulo) throws LivroNaoLocalizadoHandler {
-        Optional<Livros> livro =  livroRepository.findByTitulo(titulo);
+    private Livro verificarSeExiste(String titulo) throws LivroNaoLocalizadoException {
+        Optional<Livro> livro =  livroRepository.findByTitulo(titulo);
         if(livro.isEmpty()){
-            throw new LivroNaoLocalizadoHandler(titulo);
+            throw new LivroNaoLocalizadoException(titulo);
         }
         return livro.get();
     }

@@ -1,6 +1,6 @@
 package com.waitakaLibrary.LibraryWaitaka.Entities;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Perfil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -32,7 +32,7 @@ public class Funcionario extends Usuario{
             String CEP) {
         super(nome, telefone,matricula,CEP);
         this.email = email;
-        this.profile = Profile.FUNCIONARIO;
+        this.profile = Perfil.FUNCIONARIO;
 
     }
 

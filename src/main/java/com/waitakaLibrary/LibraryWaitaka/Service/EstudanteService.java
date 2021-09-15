@@ -1,8 +1,8 @@
 package com.waitakaLibrary.LibraryWaitaka.Service;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
+import com.waitakaLibrary.LibraryWaitaka.DTO.EstudanteDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
-import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoHandler;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoException;
 import com.waitakaLibrary.LibraryWaitaka.Repository.EstudanteRepository;
 import com.waitakaLibrary.LibraryWaitaka.mappers.EstudanteMapper;
 import lombok.AllArgsConstructor;
@@ -14,6 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -23,8 +24,9 @@ public class EstudanteService {
 
     private final EstudanteMapper estudanteMapper = EstudanteMapper.INSTANCE;
 
-    public List<Estudante> lista(){
-        return estudanteRepository.findAll();
+    public List<EstudanteDTO> listar(){
+        List<Estudante> estudantes = estudanteRepository.findAll();
+        return estudantes.stream().map(model -> new EstudanteDTO(model)).collect(Collectors.toList());
     }
 
   public EstudanteDTO cadastrar(Estudante estudante){
@@ -33,16 +35,16 @@ public class EstudanteService {
         return estudanteDTO;
 
     }
-    public ResponseEntity<EstudanteDTO> cadastrar(Estudante estudante, UriComponentsBuilder uriBuilder ){
+    public ResponseEntity<EstudanteDTO> cadastrar(EstudanteDTO estudanteDTO, UriComponentsBuilder uriBuilder ){
+        Estudante estudante = estudanteDTO.toEstudante();
         estudanteRepository.insert(estudante);
-        EstudanteDTO estudanteDTO  = estudanteMapper.toDTO(estudante);
-        URI uri = uriBuilder.path("api/v1/estudantes/{nome}").buildAndExpand(estudante.getNome()).toUri();
+        URI uri = uriBuilder.path("api/v1/estudantes/{nome}").buildAndExpand(estudanteDTO.getNome()).toUri();
 
         return ResponseEntity.created(uri).body(estudanteDTO);
 
     }
 
-    public ResponseEntity<EstudanteDTO> atualizarPorEmail (String email, EstudanteDTO estudanteDTO) throws UsuarioNaoEncontradoHandler {
+    public ResponseEntity<EstudanteDTO> atualizarPorEmail (String email, EstudanteDTO estudanteDTO) throws UsuarioNaoEncontradoException {
 
         Estudante estudanteParaSalvar = verificaSeExiste(email);
 
@@ -67,7 +69,7 @@ public class EstudanteService {
 
     }
 
-    public ResponseEntity<EstudanteDTO> deletarPorEmail (String email) throws UsuarioNaoEncontradoHandler {
+    public ResponseEntity<EstudanteDTO> deletarPorEmail (String email) throws UsuarioNaoEncontradoException {
         Estudante estudanteParaDeletar = verificaSeExiste(email);
         estudanteRepository.deleteById(estudanteParaDeletar.getId());
         EstudanteDTO estudanteDeletadoDTO = new EstudanteDTO(estudanteParaDeletar);
@@ -77,12 +79,12 @@ public class EstudanteService {
 
 
 
-    private Estudante verificaSeExiste(String email) throws UsuarioNaoEncontradoHandler {
+    private Estudante verificaSeExiste(String email) throws UsuarioNaoEncontradoException {
         Optional<Estudante> estudante =  estudanteRepository.findByEmail(email);
         if (estudante.isPresent()){
           return estudante.get();
         } else {
-            throw new UsuarioNaoEncontradoHandler(email);
+            throw new UsuarioNaoEncontradoException(email);
         }
 
     }

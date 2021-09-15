@@ -1,7 +1,7 @@
 package com.waitakaLibrary.LibraryWaitaka.Entities;
 
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Perfil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,7 +20,7 @@ public abstract class Usuario {
     @NotNull(message = "CEP não pode ser vazia")
     private String CEP;
 
-    protected Profile profile;
+    protected Perfil profile;
 
     public Usuario(String nome, String telefone, Integer matricula, String CEP) {
         this.nome = nome;

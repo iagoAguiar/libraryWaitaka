@@ -1,5 +1,6 @@
 package com.waitakaLibrary.LibraryWaitaka.Entities;
 
+import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Perfil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -22,44 +23,24 @@ public class Aluguel {
 
     @Indexed(unique = true)
     @NotNull(message = "Livro não pode ser vazio")
-    Livros livro;
+    Livro livro;
 
     @NotNull(message = "Dia do aluguel não pode ser vazio")
-    private String diaAluguel  = LocalDateTime.now().toString();
+    private String diaAluguel  = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyy"));
+
     private String dataRenovacao;
 
    private Usuario usuario;
 
+
+
     @PersistenceConstructor
     public Aluguel(
-            Livros livro,
+            Livro livro,
             Usuario usuario) {
         this.livro = livro;
         this.usuario = usuario;
-
-        defineDatas(usuario, diaAluguel);
-    }
-
-
-
-
-    private void defineDatas(Usuario locatario, String diaAluguel) {
-
-        DateTimeFormatter format1 = DateTimeFormatter.ofPattern("dd/MM/yyy");
-
-        switch (locatario.getProfile()){
-            case ESTUDANTE:
-                this.dataRenovacao = LocalDateTime.parse(diaAluguel).plusDays(7).format(format1);
-                break;
-            case FUNCIONARIO:
-                this.dataRenovacao = LocalDateTime.parse(diaAluguel).plusDays(10).format(format1);
-                break;
-            case PROFESSOR:
-                this.dataRenovacao = LocalDateTime.parse(diaAluguel).plusDays(14).format(format1);
-                break;
-        }
-        this.diaAluguel = LocalDateTime.parse(diaAluguel).format(format1);
-
+        this.dataRenovacao = Perfil.defineDatas(usuario);
     }
 
 

@@ -1,7 +1,7 @@
 package com.waitakaLibrary.LibraryWaitaka.Entities.Form;
 
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.Livros;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Livro;
 import lombok.Data;
 
 @Data
@@ -39,7 +39,7 @@ public class LivroForm {
         this.edicao = edicao;
 
     }
-    public LivroForm(Livros livro){
+    public LivroForm(Livro livro){
         this.titulo = livro.getTitulo();
         this.autor = livro.getAutor();
         this.editora = livro.getEditora();
@@ -47,8 +47,8 @@ public class LivroForm {
         this.edicao = livro.getEdicao();
     }
 
-    public Livros toLivro(){
-        return new Livros(
+    public Livro toLivro(){
+        return new Livro(
                 this.titulo,
                 this.autor,
                 this.editora,
