@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class UsuarioNaoEncontradoHandler extends  Exception{
+public class LivroNaoLocalizadoHandler extends  Exception{
 
-    public UsuarioNaoEncontradoHandler(String email){
-        super(String.format("Livro: %s não foi localizado!", email));
+    public LivroNaoLocalizadoHandler(String titulo){
+        super(String.format("Livro: %s não foi localizado!", titulo));
     }
 }

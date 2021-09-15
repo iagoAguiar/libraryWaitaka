@@ -22,8 +22,8 @@ public class TestesAluguel {
     void testeNovoAluguelEstudante() {
 
         Aluguel aluguel = AluguelBuilder.builder().build().toAlguelEstudante();
-
-        assertEquals(aluguel.getAutor(), "Paulo Coelho");
+        System.out.println(aluguel.getLivro().getAutor());
+        assertEquals(aluguel.getLivro().getAutor(), "Paulo Coelho");
         assertEquals(aluguel.getDiaAluguel(), LocalDateTime.parse(LocalDateTime.now().toString()).format($format1));
         assertEquals(aluguel.getDataRenovacao(), LocalDateTime.parse(LocalDateTime.now().plusDays(7).toString()).format($format1));
 
@@ -33,7 +33,7 @@ public class TestesAluguel {
 
         Aluguel aluguel = AluguelBuilder.builder().build().toAluguelFuncionario();
 
-        assertEquals(aluguel.getAutor(), "Paulo Coelho");
+        assertEquals(aluguel.getLivro().getAutor(), "Paulo Coelho");
         assertEquals(aluguel.getDiaAluguel(), LocalDateTime.parse(LocalDateTime.now().toString()).format($format1));
         assertEquals(aluguel.getDataRenovacao(), LocalDateTime.parse(LocalDateTime.now().plusDays(10).toString()).format($format1));
 
@@ -42,7 +42,7 @@ public class TestesAluguel {
     void testeNovoAluguelProfessor() {
 
         Aluguel aluguel = AluguelBuilder.builder().build().toAluguelProfessor();
-        assertEquals(aluguel.getAutor(), "Paulo Coelho");
+        assertEquals(aluguel.getLivro().getAutor(), "Paulo Coelho");
         assertEquals(aluguel.getDiaAluguel(), LocalDateTime.parse(LocalDateTime.now().toString()).format($format1));
         assertEquals(aluguel.getDataRenovacao(), LocalDateTime.parse(LocalDateTime.now().plusDays(14).toString()).format($format1));
     }
@@ -52,8 +52,8 @@ public class TestesAluguel {
         Aluguel aluguel = AluguelBuilder.builder().build().toAlguelEstudante();
         AluguelDTO aluguelDTO = new AluguelDTO(aluguel);
 
-        assertEquals(aluguelDTO.getTitulo(), "O alquimista");
-        assertEquals(aluguelDTO.getAutor(), "Paulo Coelho");
+        assertEquals(aluguelDTO.getLivro().getTitulo(), "O alquimista");
+        assertEquals(aluguelDTO.getLivro().getAutor(), "Paulo Coelho");
 
 
     }

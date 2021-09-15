@@ -1,10 +1,7 @@
 package com.waitakaLibrary.LibraryWaitaka.Builder;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.Aluguel;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
+import com.waitakaLibrary.LibraryWaitaka.Entities.*;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Form.AluguelForm;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
@@ -15,16 +12,7 @@ public class AluguelBuilder {
 
 
 
-    @Builder.Default
-    String titulo = "O alquimista";
-    @Builder.Default
-    String autor = "Paulo Coelho";
-    @Builder.Default
-    String editora = "Aleph";
-    @Builder.Default
-    String lancamento =  "12/04/1989";
-     @Builder.Default
-    String edicao= "1 edição";
+
      @Builder.Default
      Estudante estudante = UsuarioBuilder.builder().build().toEstudante();
      @Builder.Default
@@ -32,15 +20,16 @@ public class AluguelBuilder {
      @Builder.Default
      Professor professor = UsuarioBuilder.builder().build().toProfessor();
 
+    @Builder.Default
+     Livros livro = LivroBuilder.builder().build().toLivro();
 
-
-public Aluguel toAlguelEstudante(){return new Aluguel(titulo,autor,editora,lancamento, edicao, estudante); };
-public Aluguel toAluguelProfessor(){ return new Aluguel(titulo,autor,editora,lancamento, edicao,professor);};
-public Aluguel toAluguelFuncionario(){ return new Aluguel(titulo,autor,editora,lancamento, edicao,funcionario);};
+public Aluguel toAlguelEstudante(){return new Aluguel(livro, estudante); };
+public Aluguel toAluguelProfessor(){ return new Aluguel(livro,professor);};
+public Aluguel toAluguelFuncionario(){ return new Aluguel(livro,funcionario);};
 
 public AluguelForm toAluguelForm(){
     DateTimeFormatter format1 = DateTimeFormatter.ofPattern("dd/MM/yyy");
-    return new AluguelForm(titulo,autor,editora,LocalDateTime.now().format(format1), lancamento, edicao,funcionario.getEmail());};
+    return new AluguelForm(livro.getTitulo() ,funcionario.getEmail());};
 
 
 }
