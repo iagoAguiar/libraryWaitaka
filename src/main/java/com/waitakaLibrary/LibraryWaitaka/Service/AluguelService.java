@@ -2,9 +2,6 @@ package com.waitakaLibrary.LibraryWaitaka.Service;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.*;
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.AluguelDTO;
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.LivroDTO;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Form.AluguelForm;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Form.LivroForm;
 import com.waitakaLibrary.LibraryWaitaka.Exceptions.LivroNaoLocalizadoHandler;
 import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoHandler;
 import com.waitakaLibrary.LibraryWaitaka.Repository.*;
@@ -32,7 +29,7 @@ public class AluguelService {
 
     private final LivroRepository livroRepository;
 
-
+//    GET
     public List<Aluguel> lista(){
         return aluguelRepository.findAll();
     }
@@ -43,7 +40,7 @@ public class AluguelService {
         return aluguelDTO;
 
     }
-
+//   POST
     public ResponseEntity<AluguelDTO> cadastrar(String titulo, String email, UriComponentsBuilder uriBuilder )
             throws LivroNaoLocalizadoHandler, UsuarioNaoEncontradoHandler {
 
@@ -61,6 +58,21 @@ public class AluguelService {
 
             return ResponseEntity.created(uri).body(aluguelDTO);
     }
+
+//      DELET
+
+    public ResponseEntity<AluguelDTO> deletaPorTituloLivro(String titulo) throws LivroNaoLocalizadoHandler {
+        Aluguel aluguelParaDeletar = verificarSeExisteAluguel(titulo);
+
+        aluguelRepository.deleteById(aluguelParaDeletar.getId());
+
+        AluguelDTO aluguelDeletadoDTO = new AluguelDTO(aluguelParaDeletar);
+        return ResponseEntity.ok(aluguelDeletadoDTO);
+
+    }
+
+
+//    UTILS
 
     private Usuario getUsuario(String email) throws UsuarioNaoEncontradoHandler {
 
@@ -84,16 +96,6 @@ public class AluguelService {
         else{
             throw new UsuarioNaoEncontradoHandler(email);
         }
-    }
-
-    public ResponseEntity<AluguelDTO> deletaPorTituloLivro(String titulo) throws LivroNaoLocalizadoHandler {
-        Aluguel aluguelParaDeletar = verificarSeExisteAluguel(titulo);
-
-        aluguelRepository.deleteById(aluguelParaDeletar.getId());
-
-        AluguelDTO aluguelDeletadoDTO = new AluguelDTO(aluguelParaDeletar);
-        return ResponseEntity.ok(aluguelDeletadoDTO);
-
     }
 
     private Livros verificarSeExisteLivro(String titulo) throws LivroNaoLocalizadoHandler {

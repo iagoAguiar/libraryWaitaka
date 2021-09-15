@@ -1,12 +1,10 @@
 package com.waitakaLibrary.LibraryWaitaka.Service;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.*;
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.AluguelDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.LivroDTO;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Form.AluguelForm;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Form.LivroForm;
 import com.waitakaLibrary.LibraryWaitaka.Exceptions.LivroNaoLocalizadoHandler;
-import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoHandler;
+
 import com.waitakaLibrary.LibraryWaitaka.Repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

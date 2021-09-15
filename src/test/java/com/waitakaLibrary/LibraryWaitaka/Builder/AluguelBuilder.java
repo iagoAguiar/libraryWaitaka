@@ -4,8 +4,7 @@ import com.waitakaLibrary.LibraryWaitaka.Entities.*;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Form.AluguelForm;
 import lombok.Builder;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 
 @Builder
 public class AluguelBuilder {
@@ -28,7 +27,6 @@ public Aluguel toAluguelProfessor(){ return new Aluguel(livro,professor);};
 public Aluguel toAluguelFuncionario(){ return new Aluguel(livro,funcionario);};
 
 public AluguelForm toAluguelForm(){
-    DateTimeFormatter format1 = DateTimeFormatter.ofPattern("dd/MM/yyy");
     return new AluguelForm(livro.getTitulo() ,funcionario.getEmail());};
 
 
