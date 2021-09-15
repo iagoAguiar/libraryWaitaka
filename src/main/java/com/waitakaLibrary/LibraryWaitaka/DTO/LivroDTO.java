@@ -1,7 +1,7 @@
-package com.waitakaLibrary.LibraryWaitaka.Entities.DTO;
+package com.waitakaLibrary.LibraryWaitaka.DTO;
 
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.Livros;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Livro;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,11 +23,12 @@ public class LivroDTO {
 
     private String lancamento;
 
-    public LivroDTO(Livros livro){
+    public LivroDTO(Livro livro){
         this.titulo = livro.getTitulo();
         this.autor = livro.getAutor();
         this.editora = livro.getEditora();
         this.edicao = livro.getEdicao();
         this.lancamento = livro.getLancamento();
     }
+
 }

@@ -3,7 +3,7 @@ package com.waitakaLibrary.LibraryWaitaka.Testes;
 import com.waitakaLibrary.LibraryWaitaka.Builder.AluguelBuilder;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Aluguel;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.AluguelDTO;
+import com.waitakaLibrary.LibraryWaitaka.DTO.AluguelDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

@@ -1,8 +1,8 @@
 package com.waitakaLibrary.LibraryWaitaka.Controllers;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
+import com.waitakaLibrary.LibraryWaitaka.DTO.EstudanteDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
-import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoHandler;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoException;
 import com.waitakaLibrary.LibraryWaitaka.Service.EstudanteService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,20 +25,20 @@ public class EstudanteController {
     private EstudanteService estudanteService;
 
     @GetMapping
-    public List<Estudante> listar(){
-        return estudanteService.lista();
+    public List<EstudanteDTO> listar(){
+        return estudanteService.listar();
     }
 
     @PostMapping
     @Transactional
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<EstudanteDTO> cadastrar(@RequestBody @Valid Estudante estudante, UriComponentsBuilder uriBuilder){
-        return estudanteService.cadastrar(estudante, uriBuilder);
+    public ResponseEntity<EstudanteDTO> cadastrar(@RequestBody @Valid EstudanteDTO estudanteDTO, UriComponentsBuilder uriBuilder){
+        return estudanteService.cadastrar(estudanteDTO, uriBuilder);
     }
 
     @PutMapping("{email}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<EstudanteDTO> atualizarPorEmail(@PathVariable @Valid String email, @RequestBody @Valid EstudanteDTO estudanteDTO) throws UsuarioNaoEncontradoHandler {
+    public ResponseEntity<EstudanteDTO> atualizarPorEmail(@PathVariable @Valid String email, @RequestBody @Valid EstudanteDTO estudanteDTO) throws UsuarioNaoEncontradoException {
 
         return estudanteService.atualizarPorEmail(email, estudanteDTO);
     }
@@ -46,7 +46,7 @@ public class EstudanteController {
     @DeleteMapping("{email}")
     @Transactional
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<EstudanteDTO> deletar(@PathVariable String email ) throws UsuarioNaoEncontradoHandler {
+    public ResponseEntity<EstudanteDTO> deletar(@PathVariable String email ) throws UsuarioNaoEncontradoException {
         return estudanteService.deletarPorEmail(email);
     }
 

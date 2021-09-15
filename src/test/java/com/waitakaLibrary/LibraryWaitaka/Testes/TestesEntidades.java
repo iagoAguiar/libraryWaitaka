@@ -2,7 +2,7 @@ package com.waitakaLibrary.LibraryWaitaka.Testes;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Livros;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Livro;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ public class TestesEntidades {
 
     @Test
     void testeNovoLivro(){
-        Livros livro = new Livros(
+        Livro livro = new Livro(
                 "O Alquimista",
                 "Paulo Coelho",
                 "Aleph",

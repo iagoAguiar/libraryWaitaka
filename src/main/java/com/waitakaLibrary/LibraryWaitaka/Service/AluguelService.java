@@ -1,9 +1,9 @@
 package com.waitakaLibrary.LibraryWaitaka.Service;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.*;
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.AluguelDTO;
-import com.waitakaLibrary.LibraryWaitaka.Exceptions.LivroNaoLocalizadoHandler;
-import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoHandler;
+import com.waitakaLibrary.LibraryWaitaka.DTO.AluguelDTO;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.LivroNaoLocalizadoException;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoException;
 import com.waitakaLibrary.LibraryWaitaka.Repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -30,8 +31,9 @@ public class AluguelService {
     private final LivroRepository livroRepository;
 
 //    GET
-    public List<Aluguel> lista(){
-        return aluguelRepository.findAll();
+    public List<AluguelDTO> listar(){
+        List<Aluguel> aluguel = aluguelRepository.findAll();
+        return aluguel.stream().map(model -> new AluguelDTO(model)).collect(Collectors.toList());
     }
 
   public AluguelDTO cadastrar(Aluguel aluguel){
@@ -42,14 +44,13 @@ public class AluguelService {
     }
 //   POST
     public ResponseEntity<AluguelDTO> cadastrar(String titulo, String email, UriComponentsBuilder uriBuilder )
-            throws LivroNaoLocalizadoHandler, UsuarioNaoEncontradoHandler {
+            throws LivroNaoLocalizadoException, UsuarioNaoEncontradoException {
 
        Usuario usuario = getUsuario(email);
 
         verificarSeExisteLivro(titulo);
-        Livros livro = livroRepository.findByTitulo(titulo).get();
+        Livro livro = livroRepository.findByTitulo(titulo).get();
 
-        System.out.println(livro.getId());
         Aluguel aluguel = new Aluguel(livro, usuario);
 
         aluguelRepository.insert(aluguel);
@@ -61,20 +62,19 @@ public class AluguelService {
 
 //      DELET
 
-    public ResponseEntity<AluguelDTO> deletaPorTituloLivro(String titulo) throws LivroNaoLocalizadoHandler {
+    public ResponseEntity<AluguelDTO> deletarPorTituloLivro(String titulo) throws LivroNaoLocalizadoException {
         Aluguel aluguelParaDeletar = verificarSeExisteAluguel(titulo);
 
         aluguelRepository.deleteById(aluguelParaDeletar.getId());
 
         AluguelDTO aluguelDeletadoDTO = new AluguelDTO(aluguelParaDeletar);
         return ResponseEntity.ok(aluguelDeletadoDTO);
-
     }
 
 
 //    UTILS
 
-    private Usuario getUsuario(String email) throws UsuarioNaoEncontradoHandler {
+    private Usuario getUsuario(String email) throws UsuarioNaoEncontradoException {
 
         Optional<Funcionario> funcionario = funcionarioRepository.findByEmail(email);
         if(funcionario.isPresent()) {
@@ -94,22 +94,22 @@ public class AluguelService {
           return usuario;
         }
         else{
-            throw new UsuarioNaoEncontradoHandler(email);
+            throw new UsuarioNaoEncontradoException(email);
         }
     }
 
-    private Livros verificarSeExisteLivro(String titulo) throws LivroNaoLocalizadoHandler {
-       Optional<Livros> livro = livroRepository.findByTitulo(titulo);
+    private Livro verificarSeExisteLivro(String titulo) throws LivroNaoLocalizadoException {
+       Optional<Livro> livro = livroRepository.findByTitulo(titulo);
         if(livro.isEmpty()){
-            throw new LivroNaoLocalizadoHandler(titulo);
+            throw new LivroNaoLocalizadoException(titulo);
         }
         return livro.get();
     }
 
-    private Aluguel verificarSeExisteAluguel(String titulo) throws LivroNaoLocalizadoHandler {
+    private Aluguel verificarSeExisteAluguel(String titulo) throws LivroNaoLocalizadoException {
        Optional<Aluguel> aluguel = aluguelRepository.findByLivroTitulo(titulo);
         if(aluguel.isEmpty()){
-            throw new LivroNaoLocalizadoHandler(titulo);
+            throw new LivroNaoLocalizadoException(titulo);
         }
         return aluguel.get();
     }

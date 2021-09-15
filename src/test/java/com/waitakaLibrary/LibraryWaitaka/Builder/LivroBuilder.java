@@ -1,7 +1,7 @@
 package com.waitakaLibrary.LibraryWaitaka.Builder;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.Form.LivroForm;
-import com.waitakaLibrary.LibraryWaitaka.Entities.Livros;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Livro;
 import lombok.Builder;
 
 @Builder
@@ -19,8 +19,8 @@ public class LivroBuilder {
     String edicao= "1 edição";
 
 
-    public Livros toLivro(){
-        return new Livros(titulo,autor,editora,lancamento,edicao);
+    public Livro toLivro(){
+        return new Livro(titulo,autor,editora,lancamento,edicao);
     }
 
     public LivroForm toLivroForm(){

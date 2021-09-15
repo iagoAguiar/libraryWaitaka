@@ -1,11 +1,11 @@
 package com.waitakaLibrary.LibraryWaitaka.Controllers;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.LivroDTO;
+import com.waitakaLibrary.LibraryWaitaka.DTO.LivroDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Form.LivroForm;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.Livros;
-import com.waitakaLibrary.LibraryWaitaka.Exceptions.LivroNaoLocalizadoHandler;
-import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoHandler;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Livro;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.LivroNaoLocalizadoException;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoException;
 import com.waitakaLibrary.LibraryWaitaka.Service.LivroService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,26 +28,26 @@ public class LivroController {
     private LivroService livroService;
 
     @GetMapping
-    public List<Livros> listar(){
-        return livroService.lista();
+    public List<LivroDTO> listar(){
+        return livroService.listar();
     }
 
     @PostMapping
     @Transactional
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<LivroDTO> cadastrar(@RequestBody @Valid LivroForm livroForm, UriComponentsBuilder uriBuilder) throws UsuarioNaoEncontradoHandler {
+    public ResponseEntity<LivroDTO> cadastrar(@RequestBody @Valid LivroForm livroForm, UriComponentsBuilder uriBuilder) throws UsuarioNaoEncontradoException {
         return livroService.cadastrar(livroForm, uriBuilder);
     }
     @PutMapping("{titulo}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<LivroDTO> atualizarPorNome(@PathVariable @Valid String titulo, @RequestBody LivroDTO livroDTO) throws LivroNaoLocalizadoHandler {
+    public ResponseEntity<LivroDTO> atualizarPorNome(@PathVariable @Valid String titulo, @RequestBody LivroDTO livroDTO) throws LivroNaoLocalizadoException {
         return livroService.atualizarPorTitulo(titulo, livroDTO);
     }
 
     @DeleteMapping("{titulo}")
     @Transactional
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<LivroDTO> deletaPorNome(@PathVariable @Valid String titulo) throws LivroNaoLocalizadoHandler {
-        return livroService.deletaPorTitulo(titulo);
+    public ResponseEntity<LivroDTO> deletaPorNome(@PathVariable @Valid String titulo) throws LivroNaoLocalizadoException {
+        return livroService.deletarPorTitulo(titulo);
     }
 }

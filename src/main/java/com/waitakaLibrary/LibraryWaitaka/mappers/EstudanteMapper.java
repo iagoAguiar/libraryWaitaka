@@ -1,6 +1,6 @@
 package com.waitakaLibrary.LibraryWaitaka.mappers;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.EstudanteDTO;
+import com.waitakaLibrary.LibraryWaitaka.DTO.EstudanteDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

@@ -1,8 +1,8 @@
 package com.waitakaLibrary.LibraryWaitaka.Controllers;
 
-import com.waitakaLibrary.LibraryWaitaka.Entities.DTO.FuncionarioDTO;
+import com.waitakaLibrary.LibraryWaitaka.DTO.FuncionarioDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
-import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoHandler;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoException;
 import com.waitakaLibrary.LibraryWaitaka.Service.FuncionarioService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,27 +25,29 @@ public class FuncionarioController {
     private FuncionarioService funcionarioService;
 
     @GetMapping
-    public List<Funcionario> listar(){
-        return funcionarioService.lista();
+    public List<FuncionarioDTO> listar(){
+        return funcionarioService.listar();
     }
 
     @PostMapping
     @Transactional
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<FuncionarioDTO> cadastrar(@RequestBody @Valid Funcionario funcionario, UriComponentsBuilder uriBuilder){
-        return funcionarioService.cadastrar(funcionario, uriBuilder);
+    public ResponseEntity<FuncionarioDTO> cadastrar(@RequestBody @Valid FuncionarioDTO funcionarioDTO, UriComponentsBuilder uriBuilder){
+        return funcionarioService.cadastrar(funcionarioDTO, uriBuilder);
     }
 
 
     @PutMapping("{email}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<FuncionarioDTO> atualizarPorEmail(@PathVariable @Valid String email, @RequestBody FuncionarioDTO funcionarioDTO) throws UsuarioNaoEncontradoHandler {
+    public ResponseEntity<FuncionarioDTO> atualizarPorEmail(@PathVariable @Valid String email,
+                                                            @RequestBody FuncionarioDTO funcionarioDTO)
+            throws UsuarioNaoEncontradoException {
         return funcionarioService.atualizarPorEmail(email, funcionarioDTO);
     }
     @DeleteMapping("{email}")
     @Transactional
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<FuncionarioDTO> deletar(@PathVariable String email ) throws UsuarioNaoEncontradoHandler {
+    public ResponseEntity<FuncionarioDTO> deletar(@PathVariable String email ) throws UsuarioNaoEncontradoException {
         return funcionarioService.deletarPorEmail(email);
     }
 
