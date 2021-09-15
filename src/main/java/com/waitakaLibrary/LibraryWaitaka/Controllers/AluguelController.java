@@ -36,11 +36,6 @@ public class AluguelController {
          return aluguelService.cadastrar(aluguelForm.getTitulo(), aluguelForm.getEmail(), uriBuilder);
     }
 
-//    @PutMapping("{titulo}")
-//    @ResponseStatus(HttpStatus.ACCEPTED)
-//    public ResponseEntity<AluguelDTO> atualizarPorNome(@PathVariable @Valid String titulo, @RequestBody AluguelDTO aluguelDTO)  {
-//        return aluguelService.atualizarPorTitulo(titulo, aluguelDTO);
-//    }
 
     @DeleteMapping("{titulo}")
     @Transactional

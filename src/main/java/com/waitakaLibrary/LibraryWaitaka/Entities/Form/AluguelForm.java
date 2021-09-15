@@ -25,12 +25,6 @@ public class AluguelForm {
 
     }
 
-//public Aluguel toAluguel(Usuario usuario){
-//        return new Aluguel(
-//                ,
-//                usuario
-//        );
-//}
 
 
 
