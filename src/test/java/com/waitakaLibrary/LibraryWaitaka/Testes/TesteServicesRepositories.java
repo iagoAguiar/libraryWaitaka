@@ -11,6 +11,7 @@ import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Form.AluguelForm;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
+import com.waitakaLibrary.LibraryWaitaka.Exceptions.LivroNaoLocalizadoHandler;
 import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoHandler;
 import com.waitakaLibrary.LibraryWaitaka.Repository.EstudanteRepository;
 import com.waitakaLibrary.LibraryWaitaka.Repository.FuncionarioRepository;
@@ -168,7 +169,7 @@ public class TesteServicesRepositories {
 
 
     @Test
-    void testeCadastrarAluguelService() throws UsuarioNaoEncontradoHandler {
+    void testeCadastrarAluguelService() throws UsuarioNaoEncontradoHandler, LivroNaoLocalizadoHandler {
         Aluguel aluguel = AluguelBuilder.builder().build().toAlguelEstudante();
         AluguelForm aluguelForm = AluguelBuilder.builder().build().toAluguelForm();
         AluguelDTO aluguelDTO = new AluguelDTO(aluguel);
@@ -178,7 +179,7 @@ public class TesteServicesRepositories {
         URI uri = UriComponentsBuilder.fromUriString("api/v1/funcionarios/{nome}")
                 .buildAndExpand(funcionario.getNome()).toUri();
 
-        Mockito.when(aluguelService.cadastrar(aluguelForm, uriBuilder))
+        Mockito.when(aluguelService.cadastrar(aluguelForm.getEmail(), aluguelForm.getEmail(), uriBuilder))
                 .thenReturn(ResponseEntity.created(uri).body(aluguelDTO));
     }
 

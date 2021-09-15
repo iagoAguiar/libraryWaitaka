@@ -2,6 +2,7 @@ package com.waitakaLibrary.LibraryWaitaka.Testes;
 
 import com.waitakaLibrary.LibraryWaitaka.Entities.Estudante;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
+import com.waitakaLibrary.LibraryWaitaka.Entities.Livros;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Enums.Profile;
 import org.junit.jupiter.api.Test;
@@ -27,8 +28,19 @@ public class TestesEntidades {
         assertEquals(estudante.getEmail(), "iagoaguiar202@gmail.com");
         assertEquals(estudante.getCEP(), "28240-965");
         assertEquals(estudante.getProfile(), Profile.ESTUDANTE);
+    }
 
+    @Test
+    void testeNovoLivro(){
+        Livros livro = new Livros(
+                "O Alquimista",
+                "Paulo Coelho",
+                "Aleph",
+                "1988",
+                "1 edição");
 
+        assertEquals(livro.getTitulo(), "O Alquimista");
+        assertEquals(livro.getAutor(), "Paulo Coelho");
 
     }
 

@@ -3,6 +3,8 @@ package com.waitakaLibrary.LibraryWaitaka.Entities;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
@@ -18,44 +20,22 @@ public class Aluguel {
     @Id
     private String id;
 
-    @NotNull(message = "Titulo não pode ser vazio")
-    String titulo;
-
-    @NotNull(message = "Autor não pode ser vazio")
-    private String autor;
-
-    @NotNull(message = "Editora não pode ser vazio")
-    private String editora;
-
-    @NotNull(message = "Edição não pode ser vazio")
-    private String edicao;
+    @Indexed(unique = true)
+    @NotNull(message = "Livro não pode ser vazio")
+    Livros livro;
 
     @NotNull(message = "Dia do aluguel não pode ser vazio")
     private String diaAluguel  = LocalDateTime.now().toString();
-
     private String dataRenovacao;
-
-    @NotNull(message = "Data de lançamento não pode ser vazio")
-    private String lancamento;
-
 
    private Usuario usuario;
 
-
+    @PersistenceConstructor
     public Aluguel(
-            String titulo,
-            String autor,
-            String editora,
-            String lancamento,
-            String edicao,
+            Livros livro,
             Usuario usuario) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.editora = editora;
+        this.livro = livro;
         this.usuario = usuario;
-        this.edicao = edicao;
-        this.lancamento = lancamento;
-
 
         defineDatas(usuario, diaAluguel);
     }
