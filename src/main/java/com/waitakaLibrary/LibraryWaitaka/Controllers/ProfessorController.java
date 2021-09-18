@@ -4,6 +4,7 @@ import com.waitakaLibrary.LibraryWaitaka.DTO.ProfessorDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
 import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoException;
 import com.waitakaLibrary.LibraryWaitaka.Service.ProfessorService;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,8 @@ public class ProfessorController {
     private ProfessorService professorService;
 
     @GetMapping
+    @ApiOperation(value = "Retonar todos os Professores",
+            notes = "Este endpoint retorna todos os professores")
     public List<ProfessorDTO> listar(){
         return professorService.listar();
     }
@@ -32,11 +35,16 @@ public class ProfessorController {
     @PostMapping
     @Transactional
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation(value = "Cadastrar o Professor",
+            notes = "Este endpoint recebe um Professor com os parâmetros:  Nome,   Telefone, Matricula, CEP,Email")
     public ResponseEntity<ProfessorDTO> cadastrar(@RequestBody @Valid ProfessorDTO professorDTO, UriComponentsBuilder uriBuilder){
         return professorService.cadastrar(professorDTO, uriBuilder);
     }
     @PutMapping("{email}")
     @ResponseStatus(HttpStatus.ACCEPTED)
+    @ApiOperation(value = "Atualizar o Professor",
+            notes = "Este endpoint recebe um email  e atualiza o professor correspondente a esse email, "+
+                    "usando o(s) parâmetro(s) enviado(s).")
     public ResponseEntity<ProfessorDTO> atualizarPorEmail(@PathVariable @Valid String email, @RequestBody ProfessorDTO professorDTO) throws UsuarioNaoEncontradoException {
         return professorService.atualizarPorEmail(email, professorDTO);
     }
@@ -44,6 +52,8 @@ public class ProfessorController {
     @DeleteMapping("{email}")
     @Transactional
     @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Deletar um Professor",
+            notes = "Este endpoint recebe um e-mail e deleta o Professor referente a esse e-mail.")
     public ResponseEntity<ProfessorDTO> deletar(@PathVariable String email ) throws UsuarioNaoEncontradoException {
         return professorService.deletarPorEmail(email);
     }
