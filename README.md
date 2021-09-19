@@ -5,10 +5,11 @@ empréstimo de livros de uma biblioteca de uma universidade ficticia da
 região de Campos dos Goytacazes - RJ</p>
 
 <p align="center">
-     <a href="#objetivo">Objetivo</a> •
-     <a href="#roadmap">Roadmap</a> • 
+     <a href="#objetivo">Features</a> •
+     <a href="#roadmap">Pré-requisitos</a> • 
+     <a href="#tecnologias">Executando o projeto</a> • 
+     <a href="#tecnologias">Endpoints</a> • 
      <a href="#tecnologias">Tecnologias</a> • 
-     <a href="#contribuicao">Contribuição</a> • 
      <a href="#autor">Autor</a>
 </p>
 
@@ -45,7 +46,7 @@ docker container start mongo-express
 ```
 
 
-### 🎲 Rodando o Back End (servidor)
+###  Executando o projeto
 
 ```bash
 # Clone este repositório
@@ -69,7 +70,6 @@ selecione a classe principal e  use o atalho: CTRL + Shift + F10.
 As seguintes ferramentas foram usadas na construção do projeto:
 
 
-:innocent:
 
 - [Java](https://www.java.com/pt-BR/)
 - [Spring](https://spring.io/)
@@ -79,6 +79,42 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Mapstruct](https://mapstruct.org/)
 - [Docker](https://www.docker.com/)
 - [Bean Validation](https://beanvalidation.org/)
+
+
+### 🛠 Endpoints
+
+<h4>GET</h4>
+```
+http://localhost:8080/api/v1/alugueis
+http://localhost:8080/api/v1/estudantes
+http://localhost:8080/api/v1/professores
+http://localhost:8080/api/v1/funcionarios
+http://localhost:8080/api/v1/livros
+http://localhost:8080/
+```
+<h4>POST</h4>
+```
+http://localhost:8080/api/v1/alugueis
+http://localhost:8080/api/v1/estudantes
+http://localhost:8080/api/v1/professores
+http://localhost:8080/api/v1/funcionarios
+http://localhost:8080/api/v1/livros
+```
+<h4>PUT</h4>
+```
+http://localhost:8080/api/v1/estudantes/{email}
+http://localhost:8080/api/v1/professores/{email}
+http://localhost:8080/api/v1/funcionarios/{email}
+http://localhost:8080/api/v1/livros{titulo}
+```
+<h4>Delete</h4>
+```
+http://localhost:8080/api/v1/alugueis/{titulo}
+http://localhost:8080/api/v1/estudantes/{email}
+http://localhost:8080/api/v1/professores/{email}
+http://localhost:8080/api/v1/funcionarios/{email}
+http://localhost:8080/api/v1/livros{titulo}
+```
 
 
 ### Autor ###

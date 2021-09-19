@@ -7,6 +7,7 @@ import com.waitakaLibrary.LibraryWaitaka.Entities.Livro;
 import com.waitakaLibrary.LibraryWaitaka.Exceptions.LivroNaoLocalizadoException;
 import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoException;
 import com.waitakaLibrary.LibraryWaitaka.Service.LivroService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/livros")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
+@Api(value = "Livro",  tags = { "Livro" })
 public class LivroController {
 
     private LivroService livroService;
