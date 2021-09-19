@@ -1,4 +1,4 @@
-package com.waitakaLibrary.LibraryWaitaka;
+package com.waitakaLibrary.LibraryWaitaka.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

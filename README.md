@@ -79,7 +79,8 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Mapstruct](https://mapstruct.org/)
 - [Docker](https://www.docker.com/)
 - [Bean Validation](https://beanvalidation.org/)
-
+- [Junit](https://junit.org/junit5/)
+- [Mockito](https://site.mockito.org/)
 
 ### 🛠 Endpoints
 
