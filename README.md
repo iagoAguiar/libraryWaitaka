@@ -91,7 +91,7 @@ http://localhost:8080/api/v1/professores
 http://localhost:8080/api/v1/funcionarios
 http://localhost:8080/api/v1/livros
 http://localhost:8080/
-```
+````
 <h4>POST</h4>
 ```bash
 http://localhost:8080/api/v1/alugueis
@@ -99,14 +99,14 @@ http://localhost:8080/api/v1/estudantes
 http://localhost:8080/api/v1/professores
 http://localhost:8080/api/v1/funcionarios
 http://localhost:8080/api/v1/livros
-```
+````
 <h4>PUT</h4>
 ```bash
 http://localhost:8080/api/v1/estudantes/{email}
 http://localhost:8080/api/v1/professores/{email}
 http://localhost:8080/api/v1/funcionarios/{email}
 http://localhost:8080/api/v1/livros{titulo}
-```
+````
 <h4>Delete</h4>
 
 ```bash
