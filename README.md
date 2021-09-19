@@ -128,7 +128,7 @@ http://localhost:8080/api/v1/livros{titulo}
 
  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/38701614?v=4" width="100px;" alt=""/>
  <br />
- <sub><b>Iago Duarte de Aguiar</b></sub></a> <a href="https://blog.rocketseat.com.br/author/thiago//" title="Rocketseat">🚀</a>
+ <sub><b>Iago Duarte de Aguiar</b></sub></a> <a>🚀</a>
 
 
 Feito com ❤️ por Iago Aguiar👋🏽 Entre em contato!
