@@ -108,13 +108,13 @@ http://localhost:8080/api/v1/funcionarios/{email}
 http://localhost:8080/api/v1/livros{titulo}
 ```
 <h4>Delete</h4>
-```
+```` 
 http://localhost:8080/api/v1/alugueis/{titulo}
 http://localhost:8080/api/v1/estudantes/{email}
 http://localhost:8080/api/v1/professores/{email}
 http://localhost:8080/api/v1/funcionarios/{email}
 http://localhost:8080/api/v1/livros{titulo}
-```
+```` 
 
 
 ### Autor ###
