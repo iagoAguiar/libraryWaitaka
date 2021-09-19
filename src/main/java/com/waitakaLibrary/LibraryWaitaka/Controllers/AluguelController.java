@@ -6,6 +6,7 @@ import com.waitakaLibrary.LibraryWaitaka.Entities.Form.AluguelForm;
 import com.waitakaLibrary.LibraryWaitaka.Exceptions.LivroNaoLocalizadoException;
 import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoException;
 import com.waitakaLibrary.LibraryWaitaka.Service.AluguelService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -25,6 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/alugueis")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
+@Api(value = "Aluguel",  tags = { "Aluguel" })
 public class AluguelController {
 
     private AluguelService aluguelService;

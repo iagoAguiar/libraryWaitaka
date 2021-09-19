@@ -4,6 +4,7 @@ import com.waitakaLibrary.LibraryWaitaka.DTO.ProfessorDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Professor;
 import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoException;
 import com.waitakaLibrary.LibraryWaitaka.Service.ProfessorService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/professores")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
+@Api(value = "Professor",  tags = { "Professor" })
 public class ProfessorController {
 
     private ProfessorService professorService;

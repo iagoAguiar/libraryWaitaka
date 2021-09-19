@@ -4,6 +4,7 @@ import com.waitakaLibrary.LibraryWaitaka.DTO.FuncionarioDTO;
 import com.waitakaLibrary.LibraryWaitaka.Entities.Funcionario;
 import com.waitakaLibrary.LibraryWaitaka.Exceptions.UsuarioNaoEncontradoException;
 import com.waitakaLibrary.LibraryWaitaka.Service.FuncionarioService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/funcionarios")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
+@Api(value = "Funcionario",  tags = { "Funcioario" })
+
 public class FuncionarioController {
 
     private FuncionarioService funcionarioService;
