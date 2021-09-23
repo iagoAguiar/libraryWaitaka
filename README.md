@@ -15,7 +15,15 @@ região de Campos dos Goytacazes - RJ</p>
 
 <h4 align="center"> 
 	🚧  Biblioteca Waitaka 🚀 Escopo inicial finalizado, mas aberto para melhorias.
+<br>
+    Projeto criado usando o método de desenvolvimento <b>TDD</b> 
 </h4>
+
+
+### Artigo sobre a implementação do código:
+
+🚧 🚧 Em construção 🚧  🚧 Data de lançamento: 25/09
+
 
 ### Features
 
