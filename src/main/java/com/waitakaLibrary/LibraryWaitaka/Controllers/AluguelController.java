@@ -43,7 +43,9 @@ public class AluguelController {
     @ApiOperation(value = "Cadastrar os alugueis",
             notes = "Este endpoint recebe um titulo de um livro e um e-mail, e ele então cadastra o aluguel, sendo dois"+
     " objetos, um Livro e o Usuario, seja Professor, Estudante ou Funcionario")
-    public ResponseEntity<AluguelDTO> cadastrar(@RequestBody @Valid AluguelForm aluguelForm, UriComponentsBuilder uriBuilder) throws UsuarioNaoEncontradoException, LivroNaoLocalizadoException {
+    public ResponseEntity<AluguelDTO> cadastrar(@RequestBody @Valid AluguelForm aluguelForm,
+                                                UriComponentsBuilder uriBuilder)
+            throws UsuarioNaoEncontradoException, LivroNaoLocalizadoException {
          return aluguelService.cadastrar(aluguelForm.getTitulo(), aluguelForm.getEmail(), uriBuilder);
     }
 
