@@ -22,8 +22,8 @@ região de Campos dos Goytacazes - RJ</p>
 
 ### Artigo sobre a implementação do código:
 
-🚧 🚧 Em construção 🚧  🚧 Data de lançamento: 25/09
 
+<a target="_blank" href="https://github-readme-medium-recent-article.vercel.app/medium/@iagoaguiar202/0"><img src="https://github-readme-medium-recent-article.vercel.app/medium/@iagoaguiar202/0" alt="Sistema de controle de uma biblioteca: Biblioteca Waitaká">
 
 ### Features
 
